@@ -10,8 +10,8 @@ public class Up implements KeyHandler {
 
     @Override
     public void perform(KeyEvent event, GameMap map) {
-        Actor player = map.getPlayer();
-        if(code.equals(event.getCode()) && !player.checkTile(0, -1).equals("wall"))
-            player.move(0, -1);
+        if(code.equals(event.getCode())){
+            map.getPlayer().move(0, -1);
+        }
     }
 }
