@@ -10,9 +10,9 @@ public class Left implements KeyHandler {
 
     @Override
     public void perform(KeyEvent event, GameMap map) {
-        Actor player = map.getPlayer();
-        if(code.equals(event.getCode()) && !player.checkTile(-1, 0).equals("wall"))
-            player.move(-1, 0);
+        if(code.equals(event.getCode())){
+            map.getPlayer().move(-1, 0);
+        }
 
     }
 }
