@@ -18,6 +18,9 @@ public abstract class Actor implements Drawable {
         nextCell.setActor(this);
         cell = nextCell;
     }
+    public String checkTile(int dx, int dy) {
+        return cell.getNeighbor(dx, dy).getTileName();
+    }
 
     public int getHealth() {
         return health;
