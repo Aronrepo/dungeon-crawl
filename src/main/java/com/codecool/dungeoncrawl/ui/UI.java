@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.ui;
 
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.logic.GameLogic;
 import com.codecool.dungeoncrawl.ui.elements.MainStage;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
@@ -55,6 +56,10 @@ public class UI {
                 Cell cell = logic.getCell(x, y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
+                    if(cell.getActor().getTileName().equals("player")){
+                        Player player = (Player)cell.getActor();
+                        mainStage.addFriend(player.getFriendList());
+                    }
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
