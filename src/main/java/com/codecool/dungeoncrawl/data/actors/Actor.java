@@ -8,7 +8,9 @@ import com.codecool.dungeoncrawl.data.Drawable;
 public abstract class Actor implements Drawable {
     protected Cell cell;
     private DayPeriod dayPeriod;
-    private int health = 10;
+    private int health = 2;
+
+    private int power = 1;
 
     public Actor(Cell cell, DayPeriod dayPeriod) {
         this.cell = cell;
@@ -39,6 +41,11 @@ public abstract class Actor implements Drawable {
         return health;
     }
 
+    public void setHealth(int changeHealth) {
+        health = changeHealth;
+    }
+
+    public int getPower() { return power; }
 
     public Cell getCell() {
         return cell;
