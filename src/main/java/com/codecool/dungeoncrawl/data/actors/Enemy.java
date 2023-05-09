@@ -2,13 +2,13 @@ package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
 
-public class Donkey extends Actor{
-    public Donkey(Cell cell) {
+public class Enemy extends Actor{
+    public Enemy(Cell cell) {
         super(cell);
     }
 
     @Override
     public String getTileName() {
-        return "donkey";
+        return null;
     }
 }

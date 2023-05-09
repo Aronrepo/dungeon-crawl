@@ -1,7 +1,5 @@
 package com.codecool.dungeoncrawl.data;
 
-import com.codecool.dungeoncrawl.data.actors.Skeleton;
-
 public enum CellType {
     EMPTY("empty"),
     FLOOR("floor"),

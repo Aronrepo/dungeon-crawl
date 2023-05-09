@@ -4,6 +4,12 @@ import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.actors.*;
+import com.codecool.dungeoncrawl.data.actors.enemy.Farquad;
+import com.codecool.dungeoncrawl.data.actors.enemy.Skeleton;
+import com.codecool.dungeoncrawl.data.actors.friend.Donkey;
+import com.codecool.dungeoncrawl.data.actors.friend.Dragon;
+import com.codecool.dungeoncrawl.data.actors.friend.Fiona;
+import com.codecool.dungeoncrawl.data.actors.friend.PussInBoots;
 
 import java.io.InputStream;
 import java.util.Scanner;
