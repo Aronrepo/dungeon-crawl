@@ -11,4 +11,7 @@ public class Enemy extends Actor{
     public String getTileName() {
         return null;
     }
+    public String getTileType(){
+        return "enemy";
+    }
 }
