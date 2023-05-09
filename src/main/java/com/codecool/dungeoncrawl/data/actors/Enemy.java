@@ -1,13 +1,17 @@
 package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
+
 import com.codecool.dungeoncrawl.data.CellType;
 
 public class Enemy extends Actor{
 
-    Cell cell;
-    public Enemy(Cell cell) {
-        super(cell);
+import com.codecool.dungeoncrawl.data.DayPeriod;
+
+public class Enemy extends Actor{
+    public Enemy(Cell cell, DayPeriod dayPeriod) {
+        super(cell, dayPeriod);
+
     }
 
     @Override
@@ -15,9 +19,9 @@ public class Enemy extends Actor{
         return null;
     }
 
+
     public String getTileType(){
-        return "enemy";
-    }
+
 
     public void move(int dx, int dy) {
 
@@ -38,7 +42,3 @@ public class Enemy extends Actor{
         return !nextCell.getType().equals(CellType.WALL);
     }
 
-//    public boolean getInstance(Enemy enemy) {
-//        return enemy instanceof Enemy;
-//    }
-}

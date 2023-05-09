@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 
+import java.util.List;
+
 public class MainStage {
     private Canvas canvas;
     private Scene scene;
@@ -27,10 +29,13 @@ public class MainStage {
         return scene;
     }
 
-    public void addFriend(Friend friend){
-        this.statusPane.setFriendList(friend);
+    public void addFriend(List<String> friends){
+        this.statusPane.setFriendList(friends);
     }
     public void setHealthLabelText(String text) {
         this.statusPane.setHealthValue(text);
+    }
+    public void setDayLabelText(String text) {
+        this.statusPane.setDayValue(text);
     }
 }

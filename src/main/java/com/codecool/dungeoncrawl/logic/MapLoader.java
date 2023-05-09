@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
+import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.actors.*;
 import com.codecool.dungeoncrawl.data.actors.enemy.Farquad;
@@ -15,7 +16,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap() {
+    public static GameMap loadMap(DayPeriod dayPeriod) {
         InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
@@ -41,31 +42,31 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+                            new Skeleton(cell,dayPeriod);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
-                            map.setPlayer(new Player(cell));
+                            map.setPlayer(new Player(cell, dayPeriod));
                             break;
                         case 'p':
                             cell.setType(CellType.FLOOR);
-                            new PussInBoots(cell);
+                            new PussInBoots(cell, dayPeriod);
                             break;
                         case 'd':
                             cell.setType(CellType.FLOOR);
-                            new Donkey(cell);
+                            new Donkey(cell, dayPeriod);
                             break;
                         case 'D' :
                             cell.setType(CellType.FLOOR);
-                            new Dragon(cell);
+                            new Dragon(cell, dayPeriod);
                             break;
                         case 'F' :
                             cell.setType(CellType.FLOOR);
-                            new Farquad(cell);
+                            new Farquad(cell, dayPeriod);
                             break;
                         case 'f' :
                             cell.setType(CellType.FLOOR);
-                            new Fiona(cell);
+                            new Fiona(cell, dayPeriod);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

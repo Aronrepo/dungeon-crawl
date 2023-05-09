@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl.ui;
 
+import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.Drawable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -10,7 +11,8 @@ import java.util.Map;
 public class Tiles {
     public static int TILE_WIDTH = 32;
 
-    private static Image tileset = new Image("/tiles.png", 543 * 2, 543 * 2, true, false);
+    private static Image tilesetDay = new Image("/tiles.png", 543 * 2, 543 * 2, true, false);
+    private static Image tilesetNight = new Image("/tiles-night.png", 542 * 2, 542 * 2, true, false);
     private static Map<String, Tile> tileMap = new HashMap<>();
     public static class Tile {
         public final int x, y, w, h;
@@ -37,9 +39,15 @@ public class Tiles {
         tileMap.put("fiona", new Tile(29, 3));
     }
 
-    public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
+    public static void drawTile(GraphicsContext context, Drawable d, int x, int y, DayPeriod dayPeriod) {
         Tile tile = tileMap.get(d.getTileName());
-        context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
+        if (dayPeriod == DayPeriod.DAY) {
+            context.drawImage(tilesetDay, tile.x, tile.y, tile.w, tile.h,
                 x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
+        }
+        else {
+            context.drawImage(tilesetNight, tile.x, tile.y, tile.w, tile.h,
+                    x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
+        }
     }
 }
