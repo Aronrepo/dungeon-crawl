@@ -58,9 +58,9 @@ public class UI {
             for (int y = 0; y < logic.getMapHeight(); y++) {
                 Cell cell = logic.getCell(x, y);
                 if (cell.getActor() != null) {
-                    Tiles.drawTile(context, cell.getActor(), x, y);
+                    Tiles.drawTile(context, cell.getActor(), x, y, dayNightCycle.getDayPeriod());
                 } else {
-                    Tiles.drawTile(context, cell, x, y);
+                    Tiles.drawTile(context, cell, x, y, dayNightCycle.getDayPeriod());
                 }
             }
         }
