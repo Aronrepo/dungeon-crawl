@@ -5,48 +5,35 @@ import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.Drawable;
 
 public abstract class Actor implements Drawable {
-    private Cell cell;
+    protected Cell cell;
     private int health = 10;
 
-    private Skeleton skeleton;
+    //private Skeleton skeleton;
 
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
     }
 
-    public void move(int dx, int dy) {
 
-        Cell nextCell = cell.getNeighbor(dx, dy);
-        if (checkForWall(nextCell) && checkIfIsEmpty(nextCell)) {
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
-        } else if (checkEnemy(nextCell)) {
-            attack(nextCell);
-        }
-    }
 
     private boolean checkIfIsEmpty(Cell nextCell) {
         return nextCell.getActor() == null;
     }
-    private boolean checkForWall(Cell nextCell){
-        return !nextCell.getType().equals(CellType.WALL);
-    }
 
-    private boolean checkEnemy(Cell nextCell) {
-        return nextCell.getTileType().equals("enemy");
-    }
 
     private void attack(Cell nextCell) {
-        nextCell.getActor()
+
+        setHealth(getHealth()-2);
     }
 
     public int getHealth() {
         return health;
     }
 
-    public boolean
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     public Cell getCell() {
         return cell;
