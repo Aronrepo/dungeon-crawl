@@ -6,17 +6,20 @@ import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.Drawable;
 
 public abstract class Actor implements Drawable {
-    private Cell cell;
+
+    protected Cell cell;
     private DayPeriod dayPeriod;
     private int health = 10;
 
     public Actor(Cell cell, DayPeriod dayPeriod) {
+
         this.cell = cell;
         this.dayPeriod = dayPeriod;
         this.cell.setActor(this);
     }
 
-    public void move(int dx, int dy) {
+
+
 
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (checkForWall(nextCell)) {
@@ -45,24 +48,26 @@ public abstract class Actor implements Drawable {
         return nextCell.getActor().getTileName().equals("friend");
     }
 
+
     private boolean checkIfIsEmpty(Cell nextCell) {
         return nextCell.getActor() == null;
     }
 
-    private boolean checkForWall(Cell nextCell) {
-        return !nextCell.getType().equals(CellType.WALL);
-    }
+
 
     private void attack(Cell nextCell) {
-        nextCell.getActor();
-    }
 
-    private boolean checkEnemy(Cell nextCell) {
-        return nextCell.getType().getTileName().equals("enemy");
+        setHealth(getHealth()-2);
+
     }
 
     public int getHealth() {
         return health;
+    }
+
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
 
