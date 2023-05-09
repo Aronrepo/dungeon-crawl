@@ -8,6 +8,7 @@ public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
 
+
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
@@ -16,23 +17,34 @@ public abstract class Actor implements Drawable {
     public void move(int dx, int dy) {
 
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (checkForWall(nextCell) && checkForSkeleton(nextCell)) {
+        if (checkForWall(nextCell) && checkIfIsEmpty(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-        }
+        } /*else if (checkEnemy(nextCell)) {
+            attack(nextCell);
+        }*/
     }
 
-    private boolean checkForSkeleton(Cell nextCell) {
+    private boolean checkIfIsEmpty(Cell nextCell) {
         return nextCell.getActor() == null;
     }
     private boolean checkForWall(Cell nextCell){
         return !nextCell.getType().equals(CellType.WALL);
     }
+/*
+    private boolean checkEnemy(Cell nextCell) {
+        return nextCell.getActor().getTileType().equals("enemy");
+    }*/
+
+    private void attack(Cell nextCell) {
+        nextCell.getActor();
+    }
 
     public int getHealth() {
         return health;
     }
+
 
     public Cell getCell() {
         return cell;

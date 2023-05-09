@@ -40,8 +40,8 @@ public class StatusPane {
         borderPane.setRight(ui);
         return borderPane;
     }
-    public void setFriendList(Friend friend){
-        friendList.setText((friendList.toString() + friend.getTileName()) + ", ");
+    public void setFriendList(List<String> friends){
+        friendList.setText(friends.toString());
     }
 
     public void setHealthValue(String text) {
