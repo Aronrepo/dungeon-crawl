@@ -44,7 +44,7 @@ class ActorTest {
     @Test
     void cannotMoveIntoAnotherActor() {
         Player player = new Player(gameMap.getCell(1, 1), dayNightCycle.getDayPeriod());
-        Skeleton skeleton = new Skeleton(gameMap.getCell(2, 1));
+        Skeleton skeleton = new Skeleton(gameMap.getCell(2, 1), dayNightCycle.getDayPeriod());
         player.move(1, 0);
 
         assertEquals(1, player.getX());
