@@ -8,7 +8,6 @@ public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
 
-
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
@@ -21,9 +20,10 @@ public abstract class Actor implements Drawable {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-        } /*else if (checkEnemy(nextCell)) {
+        } else if (checkEnemy(nextCell)) {
             attack(nextCell);
-        }*/
+        }
+
     }
 
     private boolean checkIfIsEmpty(Cell nextCell) {
@@ -39,6 +39,14 @@ public abstract class Actor implements Drawable {
 
     private void attack(Cell nextCell) {
         nextCell.getActor();
+    }
+
+    private boolean checkEnemy(Cell nextCell) {
+        return nextCell.getTileType().equals("enemy");
+    }
+
+    private void attack(Cell nextCell) {
+        nextCell.getActor()
     }
 
     public int getHealth() {
