@@ -2,14 +2,17 @@ package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
+import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.Drawable;
 
 public abstract class Actor implements Drawable {
     private Cell cell;
+    private DayPeriod dayPeriod;
     private int health = 10;
 
-    public Actor(Cell cell) {
+    public Actor(Cell cell, DayPeriod dayPeriod) {
         this.cell = cell;
+        this.dayPeriod = dayPeriod;
         this.cell.setActor(this);
     }
 
@@ -42,11 +45,7 @@ public abstract class Actor implements Drawable {
     }
 
     private boolean checkEnemy(Cell nextCell) {
-        return nextCell.getTileType().equals("enemy");
-    }
-
-    private void attack(Cell nextCell) {
-        nextCell.getActor()
+        return nextCell.getType().equals("enemy");
     }
 
     public int getHealth() {

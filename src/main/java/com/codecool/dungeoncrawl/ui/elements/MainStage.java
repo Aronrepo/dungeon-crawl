@@ -35,4 +35,7 @@ public class MainStage {
     public void setHealthLabelText(String text) {
         this.statusPane.setHealthValue(text);
     }
+    public void setDayLabelText(String text) {
+        this.statusPane.setDayValue(text);
+    }
 }

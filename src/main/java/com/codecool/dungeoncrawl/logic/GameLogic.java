@@ -1,13 +1,14 @@
 package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.GameMap;
 
 public class GameLogic {
     private GameMap map;
 
-    public GameLogic() {
-        this.map = MapLoader.loadMap();
+    public GameLogic(DayPeriod dayPeriod) {
+        this.map = MapLoader.loadMap(dayPeriod);
     }
 
     public double getMapWidth() {

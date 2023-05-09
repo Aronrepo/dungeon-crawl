@@ -11,6 +11,7 @@ public class Game extends Application {
     private UI ui;
     private GameLogic logic;
     private Set<KeyHandler> keyHandlers;
+    private DayNightCycle dayNightCycle;
 
     public static void main(String[] args) {
         launch(args);
@@ -19,8 +20,9 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.keyHandlers = Set.of(new Up(), new Down(), new Left(), new Right());
-        this.logic = new GameLogic();
-        this.ui = new UI(logic, keyHandlers);
+        this.dayNightCycle = new DayNightCycle();
+        this.logic = new GameLogic(dayNightCycle.getDayPeriod());
+        this.ui = new UI(logic, keyHandlers, dayNightCycle);
         ui.setUpPain(primaryStage);
 
         primaryStage.setTitle("Dungeon Crawl");
