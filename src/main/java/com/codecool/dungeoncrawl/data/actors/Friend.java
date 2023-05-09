@@ -13,10 +13,11 @@ public class Friend extends Actor{
     public String getTileName() {
         return null;
     }
-    public String getTileType(){
+    public String getActorType(){
         return "friend";
     }
-    public void addToFriendList(){
 
+    public void addToFriendList(Player player){
+        player.addToFriends(this);
     }
 }
