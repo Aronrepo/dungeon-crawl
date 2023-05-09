@@ -7,7 +7,7 @@ public class Enemy extends Actor{
 
     private int health = 5;
 
-    private int power = 2;
+    private int power = 1;
     public Enemy(Cell cell, DayPeriod dayPeriod) {
         super(cell, dayPeriod);
     }
