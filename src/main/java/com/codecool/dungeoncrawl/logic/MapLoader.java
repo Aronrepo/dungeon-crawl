@@ -50,23 +50,23 @@ public class MapLoader {
                             break;
                         case 'p':
                             cell.setType(CellType.FLOOR);
-                            new PussInBoots(cell);
+                            new PussInBoots(cell, dayPeriod);
                             break;
                         case 'd':
                             cell.setType(CellType.FLOOR);
-                            new Donkey(cell);
+                            new Donkey(cell, dayPeriod);
                             break;
                         case 'D' :
                             cell.setType(CellType.FLOOR);
-                            new Dragon(cell);
+                            new Dragon(cell, dayPeriod);
                             break;
                         case 'F' :
                             cell.setType(CellType.FLOOR);
-                            new Farquad(cell);
+                            new Farquad(cell, dayPeriod);
                             break;
                         case 'f' :
                             cell.setType(CellType.FLOOR);
-                            new Fiona(cell);
+                            new Fiona(cell, dayPeriod);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

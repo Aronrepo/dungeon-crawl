@@ -63,9 +63,10 @@ public class UI {
                     if (cell.getActor().getTileName().equals("player")) {
                         Player player = (Player) cell.getActor();
                         mainStage.addFriend(player.getFriendList());
-                    } else {
-                        Tiles.drawTile(context, cell, x, y, dayNightCycle.getDayPeriod());
                     }
+                }
+                else {
+                    Tiles.drawTile(context, cell, x, y, dayNightCycle.getDayPeriod());
                 }
             }
             mainStage.setHealthLabelText(logic.getPlayerHealth());
