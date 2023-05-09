@@ -3,17 +3,18 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.actors.Player;
-import com.codecool.dungeoncrawl.data.actors.Skeleton;
+import com.codecool.dungeoncrawl.data.actors.enemy.Skeleton;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActorTest {
     GameMap gameMap = new GameMap(3, 3, CellType.FLOOR);
+    DayNightCycle dayNightCycle = new DayNightCycle();
 
     @Test
     void moveUpdatesCells() {
-        Player player = new Player(gameMap.getCell(1, 1));
+        Player player = new Player(gameMap.getCell(1, 1), dayNightCycle.getDayPeriod());
         player.move(1, 0);
         assertEquals(2, player.getX());
         assertEquals(1, player.getY());
@@ -24,7 +25,7 @@ class ActorTest {
     @Test
     void cannotMoveIntoWall() {
         gameMap.getCell(2, 1).setType(CellType.WALL);
-        Player player = new Player(gameMap.getCell(1, 1));
+        Player player = new Player(gameMap.getCell(1, 1), dayNightCycle.getDayPeriod());
         player.move(1, 0);
 
         assertEquals(1, player.getX());
@@ -33,7 +34,7 @@ class ActorTest {
 
     @Test
     void cannotMoveOutOfMap() {
-        Player player = new Player(gameMap.getCell(2, 1));
+        Player player = new Player(gameMap.getCell(2, 1), dayNightCycle.getDayPeriod());
         player.move(1, 0);
 
         assertEquals(2, player.getX());
@@ -42,7 +43,7 @@ class ActorTest {
 
     @Test
     void cannotMoveIntoAnotherActor() {
-        Player player = new Player(gameMap.getCell(1, 1));
+        Player player = new Player(gameMap.getCell(1, 1), dayNightCycle.getDayPeriod());
         Skeleton skeleton = new Skeleton(gameMap.getCell(2, 1));
         player.move(1, 0);
 

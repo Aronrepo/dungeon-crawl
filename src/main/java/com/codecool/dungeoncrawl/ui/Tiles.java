@@ -28,10 +28,15 @@ public class Tiles {
         // i : to the right from 1
         // j : down from 0
         tileMap.put("empty", new Tile(0, 0));
-        tileMap.put("wall", new Tile(10, 17));
+        tileMap.put("wall", new Tile(3, 2));
         tileMap.put("floor", new Tile(2, 0));
         tileMap.put("player", new Tile(20, 9));
+        tileMap.put("pussInBoots", new Tile(30,7));
+        tileMap.put("donkey", new Tile(28,7));
+        tileMap.put("dragon", new Tile(26, 8));
         tileMap.put("skeleton", new Tile(29, 6));
+        tileMap.put("farquad", new Tile(26, 9));
+        tileMap.put("fiona", new Tile(29, 3));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y, DayPeriod dayPeriod) {
