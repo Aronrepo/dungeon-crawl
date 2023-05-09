@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.ui;
 
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.logic.DayNightCycle;
 import com.codecool.dungeoncrawl.logic.GameLogic;
 import com.codecool.dungeoncrawl.ui.elements.MainStage;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
@@ -20,9 +21,10 @@ public class UI {
     private MainStage mainStage;
     private GameLogic logic;
     private Set<KeyHandler> keyHandlers;
+    private DayNightCycle dayNightCycle;
 
 
-    public UI(GameLogic logic, Set<KeyHandler> keyHandlers) {
+    public UI(GameLogic logic, Set<KeyHandler> keyHandlers, DayNightCycle dayNightCycle) {
         this.canvas = new Canvas(
                 logic.getMapWidth() * Tiles.TILE_WIDTH,
                 logic.getMapHeight() * Tiles.TILE_WIDTH);
@@ -30,6 +32,7 @@ public class UI {
         this.context = canvas.getGraphicsContext2D();
         this.mainStage = new MainStage(canvas);
         this.keyHandlers = keyHandlers;
+        this.dayNightCycle = dayNightCycle;
     }
 
     public void setUpPain(Stage primaryStage) {
@@ -44,6 +47,7 @@ public class UI {
         for (KeyHandler keyHandler : keyHandlers) {
             keyHandler.perform(keyEvent, logic.getMap());
         }
+        dayNightCycle.timePassing();
         refresh();
     }
 
@@ -61,5 +65,6 @@ public class UI {
             }
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
+        mainStage.setDayLabelText(dayNightCycle.getDayPeriod().toString());
     }
 }
