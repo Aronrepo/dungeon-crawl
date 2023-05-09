@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl.ui.elements;
 
+import com.codecool.dungeoncrawl.data.actors.Friend;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +27,9 @@ public class MainStage {
         return scene;
     }
 
+    public void addFriend(Friend friend){
+        this.statusPane.setFriendList(friend);
+    }
     public void setHealthLabelText(String text) {
         this.statusPane.setHealthValue(text);
     }
