@@ -2,13 +2,11 @@ package com.codecool.dungeoncrawl.data;
 
 public class Item implements Drawable{
 
-    DayPeriod dayPeriod;
 
     protected Cell cell;
 
-    public Item(Cell cell, DayPeriod dayPeriod){
+    public Item(Cell cell){
         this.cell = cell;
-        this.dayPeriod = dayPeriod;
         this.cell.setItem(this);
     }
 

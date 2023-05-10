@@ -69,7 +69,6 @@ public class UI {
                         mainStage.addFriend(player.getFriendList());
                     }
                 } else if (cell.getItem() != null) {
-                    System.out.println("asd");
                     Tiles.drawTile(context, cell.getItem(), x, y, dayNightCycle.getDayPeriod());
                 }
                 else {

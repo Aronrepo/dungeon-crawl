@@ -86,7 +86,7 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.GROUND);
-                            new Item(cell, dayPeriod);
+                            new Item(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
