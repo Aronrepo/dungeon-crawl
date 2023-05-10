@@ -22,8 +22,11 @@ public class Dragon extends Friend {
     }
 
     public void shootFire() {
-        getFire();
-        storedFire.setDragon(cell);
-        storedFire.move();
+        if(cell.getActor() instanceof Dragon){
+            getFire();
+            storedFire.setDragon(cell);
+            storedFire.move();
+        }
+        else storedFire.getCell().setItem(null);
     }
 }
