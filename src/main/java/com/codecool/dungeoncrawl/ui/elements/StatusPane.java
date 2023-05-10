@@ -22,6 +22,9 @@ public class StatusPane {
     private Label friendText;
     private Label friendList;
 
+    private Label itemText;
+    private Label itemList;
+
     public StatusPane() {
         ui = new GridPane();
         dayTextLabel = new Label("Time of Day: ");
@@ -32,6 +35,8 @@ public class StatusPane {
         powerValueLabel = new Label();
         friendText = new Label("Friends : ");
         friendList = new Label("");
+        itemText = new Label("Items : ");
+        itemList = new Label("");
     }
 
     public BorderPane build() {
@@ -47,6 +52,8 @@ public class StatusPane {
         ui.add(powerValueLabel, 1, 2);
         ui.add(friendText, 0, 3);
         ui.add(friendList, 1, 3);
+        ui.add(itemText, 2, 3);
+        ui.add(itemList, 1, 4);
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);
@@ -55,6 +62,10 @@ public class StatusPane {
 
     public void setFriendList(List<String> friends){
         friendList.setText(friends.toString().replace("[", "").replace("]", ""));
+    }
+
+    public void setItemList(List<String> items){
+        itemList.setText(items.toString().replace("[", "").replace("]", ""));
     }
 
 

@@ -85,7 +85,7 @@ public class MapLoader {
                             cell.setType(CellType.GROUND);
                             break;
                         case 'k':
-                            cell.setType(CellType.GROUND);
+                            cell.setType(CellType.FLOOR);
                             new Item(cell);
                             break;
                         default:
