@@ -7,7 +7,7 @@ import com.codecool.dungeoncrawl.logic.Attack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends Actor {
+public class Player extends Actor implements AffectedByNight{
 
     private static final int PLAYER_STARTER_HEALTH = 10;
     private static final int PLAYER_STARTER_POWER = 2;
@@ -17,12 +17,31 @@ public class Player extends Actor {
 
     Attack attack = new Attack();
 
-    public Player(Cell cell, DayPeriod dayPeriod) {
-        super(cell, dayPeriod, PLAYER_STARTER_HEALTH, PLAYER_STARTER_POWER);
+    public Player(Cell cell) {
+        super(cell, PLAYER_STARTER_HEALTH, PLAYER_STARTER_POWER);
     }
 
     public String getTileName() {
         return "player";
+    }
+
+    @Override
+    public int getPower() {
+        return currentAD;
+    }
+
+    private void updatePower(DayPeriod dayPeriod) {
+        int power = powerDuringDay();
+        if (dayPeriod.equals(DayPeriod.DAY)) {
+            currentAD = power;
+        }
+        else {
+            currentAD = power * 10;
+        }
+    }
+
+    private int powerDuringDay() {
+        return PLAYER_STARTER_POWER;
     }
 
     public void move(int dx, int dy) {
@@ -66,5 +85,10 @@ public class Player extends Actor {
         player.addToFriends(friend);
         cell.setType(null);
         nextCell.setActor(this);
+    }
+
+    @Override
+    public void behaviourAtNight(DayPeriod dayPeriod) {
+        updatePower(dayPeriod);
     }
 }

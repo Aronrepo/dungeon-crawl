@@ -7,8 +7,8 @@ public class Enemy extends Actor{
 
     private static final int PLAYER_HEALTH = 1;
     private static final int PLAYER_POWER = 1;
-    public Enemy(Cell cell, DayPeriod dayPeriod) {
-        super(cell, dayPeriod, PLAYER_HEALTH, PLAYER_POWER);
+    public Enemy(Cell cell) {
+        super(cell, PLAYER_HEALTH, PLAYER_POWER);
     }
 
     @Override

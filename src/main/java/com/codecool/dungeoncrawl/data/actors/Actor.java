@@ -2,29 +2,19 @@ package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
-import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.Drawable;
 
 public abstract class Actor implements Drawable {
     protected Cell cell;
-    private DayPeriod dayPeriod;
     private int health;
-
     private int power;
 
-    public Actor(Cell cell, DayPeriod dayPeriod, int health, int power) {
+    public Actor(Cell cell, int health, int power) {
         this.cell = cell;
-        this.dayPeriod = dayPeriod;
         this.cell.setActor(this);
         this.health = health;
         this.power = power;
     }
-
-
-
-
-
-
 
     protected boolean checkIfIsEmpty(Cell nextCell) {
         return nextCell.getActor() == null;
@@ -33,7 +23,6 @@ public abstract class Actor implements Drawable {
     protected boolean checkForWall(Cell nextCell) {
         return !nextCell.getType().equals(CellType.WALL);
     }
-
 
     private boolean checkEnemy(Cell nextCell) {
         return nextCell.getType().getTileName().equals("enemy");

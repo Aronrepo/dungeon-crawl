@@ -48,7 +48,7 @@ public class UI {
         for (KeyHandler keyHandler : keyHandlers) {
             keyHandler.perform(keyEvent, logic.getMap());
         }
-        dayNightCycle.timePassing();
+        logic.update();
         refresh();
     }
 

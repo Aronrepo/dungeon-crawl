@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap(DayPeriod dayPeriod) {
+    public static GameMap loadMap() {
         InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
@@ -42,31 +42,31 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell,dayPeriod);
+                            new Skeleton(cell);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
-                            map.setPlayer(new Player(cell, dayPeriod));
+                            map.setPlayer(new Player(cell));
                             break;
                         case 'p':
                             cell.setType(CellType.FLOOR);
-                            new PussInBoots(cell, dayPeriod);
+                            new PussInBoots(cell);
                             break;
                         case 'd':
                             cell.setType(CellType.FLOOR);
-                            new Donkey(cell, dayPeriod);
+                            new Donkey(cell);
                             break;
                         case 'D' :
                             cell.setType(CellType.FLOOR);
-                            new Dragon(cell, dayPeriod);
+                            new Dragon(cell);
                             break;
                         case 'F' :
                             cell.setType(CellType.FLOOR);
-                            new Farquad(cell, dayPeriod);
+                            new Farquad(cell);
                             break;
                         case 'f' :
                             cell.setType(CellType.FLOOR);
-                            new Fiona(cell, dayPeriod);
+                            map.setFiona(new Fiona(cell));
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
