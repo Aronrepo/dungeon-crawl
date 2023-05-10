@@ -8,14 +8,16 @@ import com.codecool.dungeoncrawl.data.Drawable;
 public abstract class Actor implements Drawable {
     protected Cell cell;
     private DayPeriod dayPeriod;
-    private int health = 2;
+    private int health;
 
-    private int power = 1;
+    private int power;
 
-    public Actor(Cell cell, DayPeriod dayPeriod) {
+    public Actor(Cell cell, DayPeriod dayPeriod, int health, int power) {
         this.cell = cell;
         this.dayPeriod = dayPeriod;
         this.cell.setActor(this);
+        this.health = health;
+        this.power = power;
     }
 
 

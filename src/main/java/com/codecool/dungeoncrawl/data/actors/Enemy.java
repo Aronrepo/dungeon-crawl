@@ -5,11 +5,10 @@ import com.codecool.dungeoncrawl.data.DayPeriod;
 
 public class Enemy extends Actor{
 
-    private int health = 5;
-
-    private int power = 1;
+    private static final int PLAYER_HEALTH = 1;
+    private static final int PLAYER_POWER = 1;
     public Enemy(Cell cell, DayPeriod dayPeriod) {
-        super(cell, dayPeriod);
+        super(cell, dayPeriod, PLAYER_HEALTH, PLAYER_POWER);
     }
 
     @Override
