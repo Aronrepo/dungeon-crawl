@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.DayPeriod;
+import com.codecool.dungeoncrawl.data.Item;
 import com.codecool.dungeoncrawl.logic.Attack;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public class Player extends Actor implements AffectedByNight{
     private int currentHP = PLAYER_STARTER_HEALTH;
     private int currentAD = PLAYER_STARTER_POWER;
     private List<String> friendList = new ArrayList<>();
+
+    private List<String> itemList = new ArrayList<>();
 
     Attack attack = new Attack();
 
@@ -49,11 +52,11 @@ public class Player extends Actor implements AffectedByNight{
         if(checkForLava(nextCell)){
           cell.getActor().setHealth(cell.getActor().getHealth() -3);
         }
-        if (checkForWall(nextCell) && checkIfIsEmpty(nextCell)) {
+        if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-        } else if (!checkIfIsEmpty(nextCell)) {
+        } else if (!checkIfIsEmpty(nextCell) || checkIfItem(nextCell)) {
             if (checkEnemy(nextCell)) {
                 boolean winner = attack.attack((Player) cell.getActor(), (Enemy) nextCell.getActor());
                 if (winner) {
@@ -63,6 +66,12 @@ public class Player extends Actor implements AffectedByNight{
                 }
             } else if (checkIfFriend(nextCell)) {
                 addToFriendList(nextCell);
+                cell.setActor(null);
+                nextCell.setActor(this);
+                cell = nextCell;
+            } else if (checkIfItem(nextCell)) {
+                addToItemList(nextCell);
+                nextCell.setItem(null);
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
@@ -78,6 +87,10 @@ public class Player extends Actor implements AffectedByNight{
         return friendList;
     }
 
+    public List<String> getItemList(){
+        return itemList;
+    }
+
     private boolean checkEnemy(Cell nextCell) {
         return nextCell.getActor() instanceof Enemy;
     }
@@ -87,10 +100,23 @@ public class Player extends Actor implements AffectedByNight{
     }
     private boolean checkIfFriend(Cell nextCell) { return nextCell.getActor() instanceof Friend;}
 
+    private boolean checkIfItem(Cell nextCell) { return nextCell.getItem() instanceof Item;}
+
+    public void addToItems(Item item) {
+        itemList.add(item.getTileName());
+    }
+
+
     private void addToFriendList(Cell nextCell){
         Player player = (Player) cell.getActor();
         Friend friend = (Friend) nextCell.getActor();
         player.addToFriends(friend);
+    }
+
+    private void addToItemList(Cell nextCell) {
+        Player player = (Player) cell.getActor();
+        Item item = nextCell.getItem();
+        player.addToItems(item);
     }
 
     @Override

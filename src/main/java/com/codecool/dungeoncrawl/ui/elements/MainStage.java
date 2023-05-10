@@ -41,4 +41,7 @@ public class MainStage {
     public void addFriend(List<String> friends){
         this.statusPane.setFriendList(friends);
     }
+    public void addItem(List<String> items){
+        this.statusPane.setItemList(items);
+    }
 }
