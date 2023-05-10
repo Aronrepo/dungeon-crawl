@@ -21,7 +21,6 @@ public class Skeleton extends Enemy {
     }
 
     public void move(){
-        System.out.println(turnNum);
         if(turnNum % 2 == 0){
             Cell rightCell = cell.getNeighbor(1,0);
             cell.setActor(null);

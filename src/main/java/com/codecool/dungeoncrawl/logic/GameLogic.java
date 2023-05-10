@@ -3,10 +3,12 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.GameMap;
+import com.codecool.dungeoncrawl.data.actors.friend.Dragon;
+import com.codecool.dungeoncrawl.data.items.Fire;
 
 public class GameLogic {
 
-    private final GameMap map;
+    private GameMap map;
 
     private DayNightCycle cycle;
 
@@ -45,7 +47,11 @@ public class GameLogic {
 
     public void moveSkeletons() {
         map.moveSKeletons();
+        map.getDragon().shootFire();
     }
+
+
+
 
     public void update() {
         cycle.timePassing();
