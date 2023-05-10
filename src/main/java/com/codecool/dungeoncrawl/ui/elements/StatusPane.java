@@ -17,6 +17,8 @@ public class StatusPane {
     private Label dayValueLabel;
     private Label healthTextLabel;
     private Label healthValueLabel;
+    private Label powerTextLabel;
+    private Label powerValueLabel;
     private Label friendText;
     private Label friendList;
 
@@ -26,6 +28,8 @@ public class StatusPane {
         dayValueLabel = new Label();
         healthTextLabel = new Label("Health: ");
         healthValueLabel = new Label();
+        powerTextLabel = new Label("Power: ");
+        powerValueLabel = new Label();
         friendText = new Label("Friends : ");
         friendList = new Label("");
     }
@@ -39,21 +43,31 @@ public class StatusPane {
         ui.add(dayValueLabel, 1, 0);
         ui.add(healthTextLabel, 0, 1);
         ui.add(healthValueLabel, 1, 1);
-        ui.add(friendText, 0, 2);
-        ui.add(friendList, 1, 2);
+        ui.add(powerTextLabel, 0, 2);
+        ui.add(powerValueLabel, 1, 2);
+        ui.add(friendText, 0, 3);
+        ui.add(friendList, 1, 3);
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);
         return borderPane;
     }
+
     public void setFriendList(List<String> friends){
         friendList.setText(friends.toString().replace("[", "").replace("]", ""));
     }
 
+
+    public void setDayValue(String text) {
+        dayValueLabel.setText(text);
+    }
     public void setHealthValue(String text) {
         healthValueLabel.setText(text);
     }
-    public void setDayValue(String text) {
-        dayValueLabel.setText(text);
+    public void setPowerValue(String text) {
+        powerValueLabel.setText(text);
+    }
+    public void setFriendList(List<String> friends){
+        friendList.setText(friends.toString());
     }
 }

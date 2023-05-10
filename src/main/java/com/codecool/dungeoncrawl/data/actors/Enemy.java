@@ -5,9 +5,9 @@ import com.codecool.dungeoncrawl.data.DayPeriod;
 
 public class Enemy extends Actor{
 
+    public Enemy(Cell cell, int health, int power) {
+        super(cell, health, power);
 
-    public Enemy(Cell cell, DayPeriod dayPeriod, int health, int power) {
-        super(cell, dayPeriod, health, power);
     }
 
     @Override

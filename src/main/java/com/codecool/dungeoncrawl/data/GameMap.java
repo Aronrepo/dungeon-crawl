@@ -7,14 +7,18 @@ import com.codecool.dungeoncrawl.data.actors.enemy.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.codecool.dungeoncrawl.data.actors.friend.Fiona;
+
+
 public class GameMap {
     private int width;
     private int height;
     private Cell[][] cells;
-
     private Player player;
     private final List<Skeleton> skeletons = new ArrayList<>();
     private Farquad farquad;
+    private Fiona fiona;
+
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
@@ -39,6 +43,13 @@ public class GameMap {
         return player;
     }
 
+    public void setFiona(Fiona fiona) {
+        this.fiona = fiona;
+    }
+
+    public Fiona getFiona() {
+        return fiona;
+    }
 
     public int getWidth() {
         return width;

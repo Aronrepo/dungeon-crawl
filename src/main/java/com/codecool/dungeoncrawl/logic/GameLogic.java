@@ -5,10 +5,15 @@ import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.GameMap;
 
 public class GameLogic {
+
     private final GameMap map;
 
-    public GameLogic(DayPeriod dayPeriod) {
-        this.map = MapLoader.loadMap(dayPeriod);
+    private DayNightCycle cycle;
+
+
+    public GameLogic(DayNightCycle cycle) {
+        this.map = MapLoader.loadMap();
+        this.cycle = cycle;
     }
 
     public double getMapWidth() {
@@ -30,12 +35,20 @@ public class GameLogic {
         return Integer.toString(map.getPlayer().getHealth());
     }
 
-
+    public String getPlayerPower() {
+        return Integer.toString(map.getPlayer().getPower());
+    }
     public GameMap getMap() {
         return map;
     }
 
     public void moveSkeletons(){
        map.moveSKeletons();
+
+    public void update() {
+        cycle.timePassing();
+        map.getPlayer().behaviourAtNight(cycle.getDayPeriod());
+        map.getFiona().behaviourAtNight(cycle.getDayPeriod());
+
     }
 }

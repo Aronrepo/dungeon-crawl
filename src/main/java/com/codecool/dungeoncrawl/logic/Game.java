@@ -22,7 +22,7 @@ public class Game extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.keyHandlers = Set.of(new Up(), new Down(), new Left(), new Right());
         this.dayNightCycle = new DayNightCycle();
-        this.logic = new GameLogic(dayNightCycle.getDayPeriod());
+        this.logic = new GameLogic(dayNightCycle);
         this.ui = new UI(logic, keyHandlers, dayNightCycle);
         ui.setUpPain(primaryStage);
         primaryStage.setTitle("Dungeon Crawl");
