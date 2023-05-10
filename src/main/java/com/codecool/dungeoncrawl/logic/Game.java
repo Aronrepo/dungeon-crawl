@@ -13,6 +13,7 @@ public class Game extends Application {
     private Set<KeyHandler> keyHandlers;
     private DayNightCycle dayNightCycle;
 
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -24,7 +25,6 @@ public class Game extends Application {
         this.logic = new GameLogic(dayNightCycle.getDayPeriod());
         this.ui = new UI(logic, keyHandlers, dayNightCycle);
         ui.setUpPain(primaryStage);
-
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
     }

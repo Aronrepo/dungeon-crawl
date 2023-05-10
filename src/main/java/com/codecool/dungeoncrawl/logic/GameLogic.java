@@ -5,7 +5,7 @@ import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.GameMap;
 
 public class GameLogic {
-    private GameMap map;
+    private final GameMap map;
 
     public GameLogic(DayPeriod dayPeriod) {
         this.map = MapLoader.loadMap(dayPeriod);
@@ -33,5 +33,9 @@ public class GameLogic {
 
     public GameMap getMap() {
         return map;
+    }
+
+    public void moveSkeletons(){
+       map.moveSKeletons();
     }
 }

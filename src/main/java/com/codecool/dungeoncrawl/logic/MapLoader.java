@@ -42,7 +42,7 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell,dayPeriod);
+                            map.setSkeleton(new Skeleton(cell,dayPeriod));
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
@@ -62,7 +62,7 @@ public class MapLoader {
                             break;
                         case 'F' :
                             cell.setType(CellType.FLOOR);
-                            new Farquad(cell, dayPeriod);
+                            map.setFarquad(new Farquad(cell, dayPeriod));
                             break;
                         case 'f' :
                             cell.setType(CellType.FLOOR);
