@@ -48,7 +48,7 @@ public class UI {
         for (KeyHandler keyHandler : keyHandlers) {
             keyHandler.perform(keyEvent, logic.getMap());
         }
-        dayNightCycle.timePassing();
+        logic.update();
         refresh();
     }
 
@@ -69,8 +69,9 @@ public class UI {
                     Tiles.drawTile(context, cell, x, y, dayNightCycle.getDayPeriod());
                 }
             }
-            mainStage.setHealthLabelText(logic.getPlayerHealth());
             mainStage.setDayLabelText(dayNightCycle.getDayPeriod().toString());
+            mainStage.setHealthLabelText(logic.getPlayerHealth());
+            mainStage.setPowerLabelText(logic.getPlayerPower());
         }
     }
 }
