@@ -26,10 +26,11 @@ public class Fire extends Item {
             cell = dragon;
             turn = 0;
         }
-        System.out.println(turn);
         turn += 1;
     }
-
+    public Cell getCell(){
+        return cell;
+    }
     @Override
     public String getTileName() {
         return "fire";
