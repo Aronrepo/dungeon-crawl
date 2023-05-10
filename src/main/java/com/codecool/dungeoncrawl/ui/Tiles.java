@@ -27,7 +27,7 @@ public class Tiles {
     static {
         // i : to the right from 1
         // j : down from 0
-        tileMap.put("empty", new Tile(0, 0));
+        tileMap.put("empty", new Tile(6, 0));
         tileMap.put("wall", new Tile(3, 2));
         tileMap.put("floor", new Tile(2, 0));
         tileMap.put("player", new Tile(20, 9));
@@ -37,6 +37,11 @@ public class Tiles {
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("farquad", new Tile(26, 9));
         tileMap.put("fiona", new Tile(29, 3));
+        tileMap.put("lava", new Tile(12,18));
+        tileMap.put("tree", new Tile(4,1));
+        tileMap.put("castle", new Tile(7,19));
+        tileMap.put("mud", new Tile(5,0));
+        tileMap.put("ground", new Tile(0,0));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y, DayPeriod dayPeriod) {
