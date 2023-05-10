@@ -1,9 +1,6 @@
 package com.codecool.dungeoncrawl.logic;
 
-import com.codecool.dungeoncrawl.data.Cell;
-import com.codecool.dungeoncrawl.data.CellType;
-import com.codecool.dungeoncrawl.data.DayPeriod;
-import com.codecool.dungeoncrawl.data.GameMap;
+import com.codecool.dungeoncrawl.data.*;
 import com.codecool.dungeoncrawl.data.actors.*;
 import com.codecool.dungeoncrawl.data.actors.enemy.Farquad;
 import com.codecool.dungeoncrawl.data.actors.enemy.Skeleton;
@@ -86,6 +83,10 @@ public class MapLoader {
                             break;
                         case 'g':
                             cell.setType(CellType.GROUND);
+                            break;
+                        case 'k':
+                            cell.setType(CellType.GROUND);
+                            new Item(cell, dayPeriod);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

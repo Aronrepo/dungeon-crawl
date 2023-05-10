@@ -6,6 +6,8 @@ public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
     private GameMap gameMap;
+
+    private Item item;
     private int x, y;
     private DayPeriod currentDayPeriod;
 
@@ -36,6 +38,10 @@ public class Cell implements Drawable {
     public Cell getNeighbor(int dx, int dy) {
         return gameMap.getCell(x + dx, y + dy);
     }
+
+    public Item getItem() { return item; }
+
+    public void setItem(Item item){ this.item = item; }
 
     @Override
     public String getTileName() {
