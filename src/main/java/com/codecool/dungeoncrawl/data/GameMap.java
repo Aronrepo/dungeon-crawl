@@ -7,7 +7,9 @@ import com.codecool.dungeoncrawl.data.actors.enemy.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.codecool.dungeoncrawl.data.actors.friend.Dragon;
 import com.codecool.dungeoncrawl.data.actors.friend.Fiona;
+import com.codecool.dungeoncrawl.data.items.Fire;
 
 
 public class GameMap {
@@ -17,6 +19,7 @@ public class GameMap {
     private Player player;
     private final List<Skeleton> skeletons = new ArrayList<>();
     private Farquad farquad;
+    private Dragon dragon;
     private Fiona fiona;
 
 
@@ -59,7 +62,6 @@ public class GameMap {
         return height;
     }
 
-
     public Farquad getFarquad() {
         return farquad;
     }
@@ -69,7 +71,7 @@ public class GameMap {
     }
 
     public void moveSKeletons() {
-        for(Skeleton skeleton : skeletons){
+        for (Skeleton skeleton : skeletons) {
             skeleton.move();
         }
     }
@@ -77,4 +79,16 @@ public class GameMap {
     public void setSkeleton(Skeleton skeleton) {
         skeletons.add(skeleton);
     }
+
+
+    public void setDragon(Dragon dragon) {
+        this.dragon = dragon;
+    }
+
+    public Dragon getDragon() {
+        return dragon;
+    }
+
+
+
 }
