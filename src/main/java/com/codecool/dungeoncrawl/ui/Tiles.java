@@ -42,6 +42,7 @@ public class Tiles {
         tileMap.put("castle", new Tile(7,19));
         tileMap.put("mud", new Tile(5,0));
         tileMap.put("ground", new Tile(0,0));
+        tileMap.put("sword", new Tile(0, 30));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y, DayPeriod dayPeriod) {
