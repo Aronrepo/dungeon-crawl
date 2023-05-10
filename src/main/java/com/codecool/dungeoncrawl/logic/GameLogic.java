@@ -45,19 +45,12 @@ public class GameLogic {
         return map;
     }
 
-    public void moveSkeletons() {
-        map.moveSKeletons();
-        map.getDragon().shootFire();
-    }
-
-
-
-
     public void update() {
         cycle.timePassing();
         map.getPlayer().behaviourAtNight(cycle.getDayPeriod());
         map.getFiona().behaviourAtNight(cycle.getDayPeriod());
-
+        map.moveSKeletons();
+        map.getDragon().shootFire();
     }
 }
 
