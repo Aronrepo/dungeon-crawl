@@ -9,14 +9,16 @@ import java.util.List;
 
 public class Player extends Actor {
 
-    private static final int PLAYER_HEALTH = 10;
-    private static final int PLAYER_POWER = 2;
+    private static final int PLAYER_STARTER_HEALTH = 10;
+    private static final int PLAYER_STARTER_POWER = 2;
+    private int currentHP = PLAYER_STARTER_HEALTH;
+    private int currentAD = PLAYER_STARTER_POWER;
     private List<String> friendList = new ArrayList<>();
 
     Attack attack = new Attack();
 
     public Player(Cell cell, DayPeriod dayPeriod) {
-        super(cell, dayPeriod, PLAYER_HEALTH, PLAYER_POWER);
+        super(cell, dayPeriod, PLAYER_STARTER_HEALTH, PLAYER_STARTER_POWER);
     }
 
     public String getTileName() {

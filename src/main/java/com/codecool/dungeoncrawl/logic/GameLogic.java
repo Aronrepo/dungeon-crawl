@@ -30,7 +30,9 @@ public class GameLogic {
         return Integer.toString(map.getPlayer().getHealth());
     }
 
-
+    public String getPlayerPower() {
+        return Integer.toString(map.getPlayer().getPower());
+    }
     public GameMap getMap() {
         return map;
     }

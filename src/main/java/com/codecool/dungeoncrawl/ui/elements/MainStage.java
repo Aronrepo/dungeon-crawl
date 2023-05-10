@@ -29,13 +29,16 @@ public class MainStage {
         return scene;
     }
 
-    public void addFriend(List<String> friends){
-        this.statusPane.setFriendList(friends);
+    public void setDayLabelText(String text) {
+        this.statusPane.setDayValue(text);
     }
     public void setHealthLabelText(String text) {
         this.statusPane.setHealthValue(text);
     }
-    public void setDayLabelText(String text) {
-        this.statusPane.setDayValue(text);
+    public void setPowerLabelText(String text) {
+        this.statusPane.setPowerValue(text);
+    }
+    public void addFriend(List<String> friends){
+        this.statusPane.setFriendList(friends);
     }
 }
