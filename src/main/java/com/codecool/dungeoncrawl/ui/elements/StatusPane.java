@@ -52,7 +52,7 @@ public class StatusPane {
         ui.add(powerValueLabel, 1, 2);
         ui.add(friendText, 0, 3);
         ui.add(friendList, 1, 3);
-        ui.add(itemText, 2, 3);
+        ui.add(itemText, 0, 4);
         ui.add(itemList, 1, 4);
 
         BorderPane borderPane = new BorderPane();
