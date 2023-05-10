@@ -12,8 +12,6 @@ public class Attack {
         enemy.setHealth(enemy.getHealth() - player.getPower());
         if(player.getHealth() <= 0) {
             System.out.println("You loose!");
-        }
-        if(enemy.getHealth() <= 0) {
             return true;
         }
         return false;

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Player extends Actor {
 
-    private static final int PLAYER_HEALTH = 10;
+    private static int PLAYER_HEALTH = 10;
     private static final int PLAYER_POWER = 2;
     private List<String> friendList = new ArrayList<>();
 
@@ -24,8 +24,10 @@ public class Player extends Actor {
     }
 
     public void move(int dx, int dy) {
-
-        Cell nextCell = cell.getNeighbor(dx, dy);
+            Cell nextCell = cell.getNeighbor(dx, dy);
+        if(checkForLava(nextCell)){
+          cell.getActor().setHealth(cell.getActor().getHealth() -3);
+        }
         if (checkForWall(nextCell) && checkIfIsEmpty(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
@@ -59,6 +61,9 @@ public class Player extends Actor {
         return nextCell.getActor() instanceof Enemy;
     }
 
+    private void lavaHurts(Cell nextCell){
+
+    }
     private boolean checkIfFriend(Cell nextCell) { return nextCell.getActor() instanceof Friend;}
 
     private void addToFriendList(Cell nextCell){
