@@ -40,6 +40,9 @@ public class Player extends Actor {
                 }
             } else if (checkIfFriend(nextCell)) {
                 addToFriendList(nextCell);
+                cell.setActor(null);
+                nextCell.setActor(this);
+                cell = nextCell;
             }
         }
 
@@ -62,7 +65,5 @@ public class Player extends Actor {
         Player player = (Player) cell.getActor();
         Friend friend = (Friend) nextCell.getActor();
         player.addToFriends(friend);
-        cell.setType(null);
-        nextCell.setActor(this);
     }
 }

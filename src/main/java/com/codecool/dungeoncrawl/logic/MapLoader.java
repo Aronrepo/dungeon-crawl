@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static GameMap loadMap(DayPeriod dayPeriod) {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+        InputStream is = MapLoader.class.getResourceAsStream("/oldMap.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -57,7 +57,7 @@ public class MapLoader {
                             new Donkey(cell, dayPeriod);
                             break;
                         case 'D' :
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(CellType.GROUND);
                             new Dragon(cell, dayPeriod);
                             break;
                         case 'F' :
@@ -67,6 +67,21 @@ public class MapLoader {
                         case 'f' :
                             cell.setType(CellType.FLOOR);
                             new Fiona(cell, dayPeriod);
+                            break;
+                        case 'l' :
+                            cell.setType(CellType.LAVA);
+                            break;
+                        case 't' :
+                            cell.setType(CellType.TREE);
+                            break;
+                        case 'c':
+                            cell.setType(CellType.CASTLE);
+                            break;
+                        case 'm':
+                            cell.setType(CellType.MUD);
+                            break;
+                        case 'g':
+                            cell.setType(CellType.GROUND);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

@@ -21,11 +21,6 @@ public abstract class Actor implements Drawable {
     }
 
 
-
-
-
-
-
     protected boolean checkIfIsEmpty(Cell nextCell) {
         return nextCell.getActor() == null;
     }
