@@ -29,7 +29,7 @@ public abstract class Actor implements Drawable {
         return !nextCell.getType().equals(CellType.WALL);
     }
 
-
+    protected boolean checkForLava(Cell nextCell) {return nextCell.getType().equals(CellType.LAVA);}
     private boolean checkEnemy(Cell nextCell) {
         return nextCell.getType().getTileName().equals("enemy");
     }
