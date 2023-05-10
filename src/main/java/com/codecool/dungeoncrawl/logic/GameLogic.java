@@ -5,8 +5,11 @@ import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.GameMap;
 
 public class GameLogic {
-    private GameMap map;
+
+    private final GameMap map;
+
     private DayNightCycle cycle;
+
 
     public GameLogic(DayNightCycle cycle) {
         this.map = MapLoader.loadMap();
@@ -39,9 +42,13 @@ public class GameLogic {
         return map;
     }
 
+    public void moveSkeletons(){
+       map.moveSKeletons();
+
     public void update() {
         cycle.timePassing();
         map.getPlayer().behaviourAtNight(cycle.getDayPeriod());
         map.getFiona().behaviourAtNight(cycle.getDayPeriod());
+
     }
 }

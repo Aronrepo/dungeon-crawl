@@ -53,6 +53,11 @@ public class StatusPane {
         return borderPane;
     }
 
+    public void setFriendList(List<String> friends){
+        friendList.setText(friends.toString().replace("[", "").replace("]", ""));
+    }
+
+
     public void setDayValue(String text) {
         dayValueLabel.setText(text);
     }

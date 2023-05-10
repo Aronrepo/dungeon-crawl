@@ -43,7 +43,8 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+
+                            map.setSkeleton(new Skeleton(cell));
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
@@ -59,11 +60,13 @@ public class MapLoader {
                             break;
                         case 'D' :
                             cell.setType(CellType.GROUND);
-                            new Dragon(cell, dayPeriod);
+                            new Dragon(cell);
                             break;
                         case 'F' :
                             cell.setType(CellType.FLOOR);
-                            new Farquad(cell);
+
+                            map.setFarquad(new Farquad(cell));
+
                             break;
                         case 'f' :
                             cell.setType(CellType.FLOOR);
