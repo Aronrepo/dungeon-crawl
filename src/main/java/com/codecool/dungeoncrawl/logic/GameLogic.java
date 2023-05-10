@@ -14,7 +14,7 @@ public class GameLogic {
 
 
     public GameLogic(DayNightCycle cycle) {
-        this.map = MapLoader.loadMap();
+        this.map = MapLoader.loadStarterMap();
         this.cycle = cycle;
     }
 
@@ -51,6 +51,13 @@ public class GameLogic {
         map.getFiona().behaviourAtNight(cycle.getDayPeriod());
         map.moveSKeletons();
         map.getDragon().shootFire();
+
+        if (Integer.parseInt(getPlayerHealth()) <= 0) {
+            map = MapLoader.loadLoseMap();
+        }
+        else if (map.getPlayer().getFriendList().contains("fiona")) {
+            map = MapLoader.loadWinMap();
+        }
     }
 }
 

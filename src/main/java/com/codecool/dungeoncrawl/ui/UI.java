@@ -49,35 +49,32 @@ public class UI {
             keyHandler.perform(keyEvent, logic.getMap());
         }
 
-        logic.moveSkeletons();
         logic.update();
-
         refresh();
     }
 
     public void refresh() {
         context.setFill(Color.BLACK);
-        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < logic.getMapWidth(); x++) {
-            for (int y = 0; y < logic.getMapHeight(); y++) {
-                Cell cell = logic.getCell(x, y);
-                if (cell.getActor() != null) {
-                    Tiles.drawTile(context, cell.getActor(), x, y, dayNightCycle.getDayPeriod());
-                    if (cell.getActor().getTileName().equals("player")) {
-                        Player player = (Player) cell.getActor();
-                        mainStage.addFriend(player.getFriendList());
-                        mainStage.addItem(player.getItemList());
+            context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            for (int x = 0; x < logic.getMapWidth(); x++) {
+                for (int y = 0; y < logic.getMapHeight(); y++) {
+                    Cell cell = logic.getCell(x, y);
+                    if (cell.getActor() != null) {
+                        Tiles.drawTile(context, cell.getActor(), x, y, dayNightCycle.getDayPeriod());
+                        if (cell.getActor().getTileName().equals("player")) {
+                            Player player = (Player) cell.getActor();
+                            mainStage.addFriend(player.getFriendList());
+                            mainStage.addItem(player.getItemList());
+                        }
+                    } else if (cell.getItem() != null) {
+                        Tiles.drawTile(context, cell.getItem(), x, y, dayNightCycle.getDayPeriod());
+                    } else {
+                        Tiles.drawTile(context, cell, x, y, dayNightCycle.getDayPeriod());
                     }
-                } else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(), x, y, dayNightCycle.getDayPeriod());
                 }
-                else {
-                    Tiles.drawTile(context, cell, x, y, dayNightCycle.getDayPeriod());
-                }
+                mainStage.setDayLabelText(dayNightCycle.getDayPeriod().toString());
+                mainStage.setHealthLabelText(logic.getPlayerHealth());
+                mainStage.setPowerLabelText(logic.getPlayerPower());
             }
-            mainStage.setDayLabelText(dayNightCycle.getDayPeriod().toString());
-            mainStage.setHealthLabelText(logic.getPlayerHealth());
-            mainStage.setPowerLabelText(logic.getPlayerPower());
         }
-    }
 }

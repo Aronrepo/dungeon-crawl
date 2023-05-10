@@ -1,0 +1,21 @@
+25 20
+llllllllllllllllllllllll
+lggggggggggggggggggggggl
+lggggggggggggggggggggggl
+lggggggggggggggggggggggl
+lgglllggllggllgllglllggl
+lgglggglgglglglglglggggl
+lgglllgllllglggglgllgggl
+lgglglglgglglggglglggggl
+lgglllglgglglggglglllggl
+lggggggggggggggggggggggl
+lggggggggggggggggggggggl
+lgggllgglggglglllgllllgl
+lgglgglglggglglggglgglgl
+lgglgglglggglgllggllllgl
+lgglgglgglglgglggglglggl
+lgggllgggglggglllglgglgl
+lggggggggggggggggggggggl
+lggggggggggggggggggggggl
+lggggggggggggggggggggggl
+llllllllllllllllllllllll
