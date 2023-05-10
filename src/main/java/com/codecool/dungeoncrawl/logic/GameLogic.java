@@ -38,12 +38,14 @@ public class GameLogic {
     public String getPlayerPower() {
         return Integer.toString(map.getPlayer().getPower());
     }
+
     public GameMap getMap() {
         return map;
     }
 
-    public void moveSkeletons(){
-       map.moveSKeletons();
+    public void moveSkeletons() {
+        map.moveSKeletons();
+    }
 
     public void update() {
         cycle.timePassing();
@@ -52,3 +54,4 @@ public class GameLogic {
 
     }
 }
+

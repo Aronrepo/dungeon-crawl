@@ -67,7 +67,5 @@ public class StatusPane {
     public void setPowerValue(String text) {
         powerValueLabel.setText(text);
     }
-    public void setFriendList(List<String> friends){
-        friendList.setText(friends.toString());
-    }
+
 }
