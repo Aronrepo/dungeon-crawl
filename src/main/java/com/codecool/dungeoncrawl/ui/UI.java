@@ -50,7 +50,6 @@ public class UI {
         }
 
         logic.moveSkeletons();
-
         logic.update();
 
         refresh();
