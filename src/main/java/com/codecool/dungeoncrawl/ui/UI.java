@@ -56,6 +56,7 @@ public class UI {
     public void refresh() {
         context.setFill(Color.BLACK);
             context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            boolean isTherePlayer = false;
             for (int x = 0; x < logic.getMapWidth(); x++) {
                 for (int y = 0; y < logic.getMapHeight(); y++) {
                     Cell cell = logic.getCell(x, y);
@@ -63,8 +64,11 @@ public class UI {
                         Tiles.drawTile(context, cell.getActor(), x, y, dayNightCycle.getDayPeriod());
                         if (cell.getActor().getTileName().equals("player")) {
                             Player player = (Player) cell.getActor();
+                            mainStage.setHealthLabelText(logic.getPlayerHealth());
+                            mainStage.setPowerLabelText(logic.getPlayerPower());
                             mainStage.addFriend(player.getFriendList());
                             mainStage.addItem(player.getItemList());
+                            isTherePlayer = true;
                         }
                     } else if (cell.getItem() != null) {
                         Tiles.drawTile(context, cell.getItem(), x, y, dayNightCycle.getDayPeriod());
@@ -73,8 +77,9 @@ public class UI {
                     }
                 }
                 mainStage.setDayLabelText(dayNightCycle.getDayPeriod().toString());
-                mainStage.setHealthLabelText(logic.getPlayerHealth());
-                mainStage.setPowerLabelText(logic.getPlayerPower());
+                if (!isTherePlayer) {
+                    mainStage.setHealthLabelText("0");
+                }
             }
         }
 }

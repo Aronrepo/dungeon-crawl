@@ -160,6 +160,9 @@ public class MapLoader {
                         case 'g':
                             cell.setType(CellType.GROUND);
                             break;
+                        case 'c':
+                            cell.setType(CellType.CASTLE);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
