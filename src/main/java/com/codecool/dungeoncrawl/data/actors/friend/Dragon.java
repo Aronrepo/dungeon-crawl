@@ -14,7 +14,6 @@ public class Dragon extends Friend {
     public String getTileName() {
         return "dragon";
     }
-
     public void getFire() {
         if(storedFire == null){
             storedFire = new Fire(cell.getNeighbor(0, -1));

@@ -4,6 +4,8 @@ import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.Item;
 import com.codecool.dungeoncrawl.data.actors.friend.Dragon;
+import com.codecool.dungeoncrawl.data.actors.friend.Fiona;
+import com.codecool.dungeoncrawl.data.actors.friend.PussInBoots;
 import com.codecool.dungeoncrawl.logic.Attack;
 
 import java.util.ArrayList;
@@ -104,7 +106,7 @@ public class Player extends Actor implements AffectedByNight {
                         nextCell.setActor(this);
                         cell = nextCell;
                     }
-                  if (checkFiona(nextCell)) {
+                  if (checkForFiona(nextCell)) {
                        addToFriendList(nextCell);
                         cell.setActor(null);
                         nextCell.setActor(this);
