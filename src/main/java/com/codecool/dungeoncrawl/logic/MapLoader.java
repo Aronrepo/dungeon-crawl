@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class MapLoader {
 
-    public static GameMap loadMap() {
+    public static GameMap loadStarterMap() {
         InputStream is = MapLoader.class.getResourceAsStream("/oldMap.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
@@ -91,6 +91,77 @@ public class MapLoader {
                         case '?' :
                             cell.setType(CellType.GROUND);
                            new Fire(cell);
+                            break;
+                        default:
+                            throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
+                    }
+                }
+            }
+        }
+        return map;
+    }
+
+    public static GameMap loadLoseMap() {
+        InputStream is = MapLoader.class.getResourceAsStream("/lose.txt");
+        Scanner scanner = new Scanner(is);
+        int width = scanner.nextInt();
+        int height = scanner.nextInt();
+
+        scanner.nextLine(); // empty line
+
+        GameMap map = new GameMap(width, height, CellType.EMPTY);
+        for (int y = 0; y < height; y++) {
+            String line = scanner.nextLine();
+            for (int x = 0; x < width; x++) {
+                if (x < line.length()) {
+                    Cell cell = map.getCell(x, y);
+                    switch (line.charAt(x)) {
+                        case 'l' :
+                            cell.setType(CellType.LAVA);
+                            break;
+                        case 'g':
+                            cell.setType(CellType.GROUND);
+                            break;
+                        default:
+                            throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
+                    }
+                }
+            }
+        }
+        return map;
+    }
+
+    public static GameMap loadWinMap() {
+        InputStream is = MapLoader.class.getResourceAsStream("/win.txt");
+        Scanner scanner = new Scanner(is);
+        int width = scanner.nextInt();
+        int height = scanner.nextInt();
+
+        scanner.nextLine(); // empty line
+
+        GameMap map = new GameMap(width, height, CellType.EMPTY);
+        for (int y = 0; y < height; y++) {
+            String line = scanner.nextLine();
+            for (int x = 0; x < width; x++) {
+                if (x < line.length()) {
+                    Cell cell = map.getCell(x, y);
+                    switch (line.charAt(x)) {
+                        case '#':
+                            cell.setType(CellType.WALL);
+                            break;
+                        case '@':
+                            cell.setType(CellType.FLOOR);
+                            map.setPlayer(new Player(cell));
+                            break;
+                        case 'f' :
+                            cell.setType(CellType.FLOOR);
+                            map.setFiona(new Fiona(cell));
+                            break;
+                        case 'g':
+                            cell.setType(CellType.GROUND);
+                            break;
+                        case 'c':
+                            cell.setType(CellType.CASTLE);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
