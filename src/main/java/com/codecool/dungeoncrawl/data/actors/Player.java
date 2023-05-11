@@ -62,47 +62,63 @@ public class Player extends Actor implements AffectedByNight {
 
     private int powerDuringDay() {
         int power = 0;
-        if (itemList.contains("sword")){
+        if (itemList.contains("sword")) {
             power += 2;
         }
         return PLAYER_STARTER_POWER + power;
     }
 
     public void move(int dx, int dy) {
-        System.out.println(friendList);
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (checkForLava(nextCell)) {
-            cell.getActor().setHealth(cell.getActor().getHealth() - 3);
+            moveToLava();
         }
         if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell)) {
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
+            moveToNext(nextCell);
         } else if (!checkIfIsEmpty(nextCell) || checkIfItem(nextCell)) {
             if (checkEnemy(nextCell)) {
-                boolean winner = attack.attack((Player) cell.getActor(), (Enemy) nextCell.getActor());
-                if (winner) {
-                    cell.setActor(null);
-                    nextCell.setActor(this);
-                    cell = nextCell;
-                }
+                killingAndWinning(nextCell);
             } else if (checkIfFriend(nextCell)) {
                 if (checkIfDonkeyIsFriend()) {
                    if (checkForPussInBoots(nextCell) || checkForDragon(nextCell) || checkForFiona(nextCell)) {
-                        addToFriendList(nextCell);
+                        addToFriendAndMove(nextCell);
                       }
                 }
                 else if(checkForDonkey(nextCell)) {
-                    addToFriendList(nextCell);
+                    addToFriendAndMove(nextCell);
                 }
             } else if (checkIfItem(nextCell)) {
-                addToItemList(nextCell);
-                nextCell.setItem(null);
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
+                addToItemListAndMove(nextCell);
             }
         }
+    }
+
+    private void moveToLava() {
+        cell.getActor().setHealth(cell.getActor().getHealth() - 3);
+    }
+
+    private void moveToNext(Cell nextCell) {
+        cell.setActor(null);
+        nextCell.setActor(this);
+        cell = nextCell;
+    }
+
+    private void killingAndWinning(Cell nextCell) {
+        boolean winner = attack.attack((Player) cell.getActor(), (Enemy) nextCell.getActor());
+        if (winner) {
+            moveToNext(nextCell);
+        }
+    }
+
+    private void addToItemListAndMove(Cell nextCell) {
+        addToItemList(nextCell);
+        nextCell.setItem(null);
+        moveToNext(nextCell);
+    }
+
+    private void addToFriendAndMove(Cell nextCell) {
+        addToFriendList(nextCell);
+        moveToNext(nextCell);
     }
 
     private boolean checkForDragon(Cell nextCell) {
@@ -112,8 +128,8 @@ public class Player extends Actor implements AffectedByNight {
     private boolean checkForPussInBoots(Cell nextCell) {
         return nextCell.getActor() instanceof PussInBoots;
     }
-  
-   private boolean checkForFiona(Cell nextCell) {
+
+    private boolean checkForFiona(Cell nextCell) {
         return nextCell.getActor() instanceof Fiona;
     }
 
@@ -137,10 +153,6 @@ public class Player extends Actor implements AffectedByNight {
         return nextCell.getActor() instanceof Enemy;
     }
 
-    private void lavaHurts(Cell nextCell) {
-
-    }
-
     private boolean checkIfFriend(Cell nextCell) {
         return nextCell.getActor() instanceof Friend;
     }
@@ -158,9 +170,6 @@ public class Player extends Actor implements AffectedByNight {
         Friend friend = (Friend) nextCell.getActor();
         friendList.add(friend.getTileName());
         currentHP = currentHP + 5;
-        cell.setActor(null);
-        nextCell.setActor(this);
-        cell = nextCell;
     }
 
     private void addToItemList(Cell nextCell) {
