@@ -30,6 +30,16 @@ public class Player extends Actor implements AffectedByNight {
     }
 
     @Override
+    public int getHealth() {
+        return currentHP;
+    }
+
+    @Override
+    public void setHealth(int changeHealth) {
+        currentHP = changeHealth;
+    }
+
+    @Override
     public int getPower() {
         return currentAD;
     }
@@ -68,7 +78,7 @@ public class Player extends Actor implements AffectedByNight {
         } else if (checkForLava(nextCell)) {
             cell.getActor().setHealth(cell.getActor().getHealth() - 3);
         }
-        if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell) && !checkForDragon(nextCell)) {
+        if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -80,11 +90,27 @@ public class Player extends Actor implements AffectedByNight {
                     nextCell.setActor(this);
                     cell = nextCell;
                 }
-            } else if (checkIfFriend(nextCell) && !checkForDragon(nextCell)) {
-                addToFriendList(nextCell);
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
+            } else if (checkIfFriend(nextCell)) {
+                if (checkForDonkey()) {
+                   if (checkForPussInBoots(nextCell)) {
+                        addToFriendList(nextCell);
+                        cell.setActor(null);
+                        nextCell.setActor(this);
+                        cell = nextCell;
+                      }
+                    if (checkForDragon(nextCell)) {
+                       addToFriendList(nextCell);
+                        cell.setActor(null);
+                        nextCell.setActor(this);
+                        cell = nextCell;
+                    }
+                  if (checkFiona(nextCell)) {
+                       addToFriendList(nextCell);
+                        cell.setActor(null);
+                        nextCell.setActor(this);
+                        cell = nextCell;
+                    }
+                }
             } else if (checkIfItem(nextCell)) {
                 addToItemList(nextCell);
                 nextCell.setItem(null);
@@ -99,12 +125,21 @@ public class Player extends Actor implements AffectedByNight {
         return nextCell.getActor() instanceof Dragon;
     }
 
+    private boolean checkForPussInBoots(Cell nextCell) {
+        return nextCell.getActor() instanceof PussInBoots;
+    }
+  
+   private boolean checkForFiona(Cell nextCell) {
+        return nextCell.getActor() instanceof Fiona;
+    }
+
     private boolean checkForDonkey() {
         return friendList.contains("donkey");
     }
 
     public void addToFriends(Friend friend) {
         friendList.add(friend.getTileName());
+        currentHP = currentHP + 5;
     }
 
     public List<String> getFriendList() {
