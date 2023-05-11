@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.data.actors.enemy;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.actors.Enemy;
+import com.codecool.dungeoncrawl.data.actors.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,17 +27,19 @@ public class Skeleton extends Enemy {
 
     public void move() {
         if (this.getHealth() <= 0) {
-            cell.setActor(null);
+            if (cell.getActor() instanceof Skeleton) {
+                cell.setActor(null);
+            }
         } else if (turnNum % 2 == 0) {
             Cell rightCell = cell.getNeighbor(1, 0);
-            if(checkSurroundingCells()){
+            if (checkSurroundingCells()) {
                 cell.setActor(null);
                 rightCell.setActor(this);
                 cell = rightCell;
             }
         } else {
             Cell leftCell = cell.getNeighbor(-1, 0);
-            if(checkSurroundingCells()){
+            if (checkSurroundingCells()) {
                 cell.setActor(null);
                 leftCell.setActor(this);
                 cell = leftCell;
