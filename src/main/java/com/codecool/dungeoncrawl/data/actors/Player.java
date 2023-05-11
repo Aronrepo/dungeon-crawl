@@ -61,7 +61,7 @@ public class Player extends Actor implements AffectedByNight {
 
     private int powerDuringDay() {
         int power = 0;
-        if (itemList.contains("sword")){
+        if (itemList.contains("sword")) {
             power += 2;
         }
         return PLAYER_STARTER_POWER + power;
@@ -70,49 +70,57 @@ public class Player extends Actor implements AffectedByNight {
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (checkForLava(nextCell)) {
-            cell.getActor().setHealth(cell.getActor().getHealth() - 3);
+            moveToLava();
         }
         if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell)) {
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
+            moveToNext(nextCell);
         } else if (!checkIfIsEmpty(nextCell) || checkIfItem(nextCell)) {
             if (checkEnemy(nextCell)) {
-                boolean winner = attack.attack((Player) cell.getActor(), (Enemy) nextCell.getActor());
-                if (winner) {
-                    cell.setActor(null);
-                    nextCell.setActor(this);
-                    cell = nextCell;
-                }
+                killingAndWinning(nextCell);
             } else if (checkIfFriend(nextCell)) {
                 if (checkForDonkey()) {
-                   if (checkForPussInBoots(nextCell)) {
-                        addToFriendList(nextCell);
-                        cell.setActor(null);
-                        nextCell.setActor(this);
-                        cell = nextCell;
-                      }
-                    if (checkForDragon(nextCell)) {
-                       addToFriendList(nextCell);
-                        cell.setActor(null);
-                        nextCell.setActor(this);
-                        cell = nextCell;
+                    if (checkForPussInBoots(nextCell)) {
+                        addToFriendAndMove(nextCell);
                     }
-                  if (checkForFiona(nextCell)) {
-                       addToFriendList(nextCell);
-                        cell.setActor(null);
-                        nextCell.setActor(this);
-                        cell = nextCell;
+                    if (checkForDragon(nextCell)) {
+                        addToFriendAndMove(nextCell);
+                    }
+                    if (checkForFiona(nextCell)) {
+                        addToFriendAndMove(nextCell);
                     }
                 }
             } else if (checkIfItem(nextCell)) {
-                addToItemList(nextCell);
-                nextCell.setItem(null);
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
+                addToItemListAndMove(nextCell);
             }
         }
+    }
+
+    private void moveToLava() {
+        cell.getActor().setHealth(cell.getActor().getHealth() - 3);
+    }
+
+    private void moveToNext(Cell nextCell) {
+        cell.setActor(null);
+        nextCell.setActor(this);
+        cell = nextCell;
+    }
+
+    private void killingAndWinning(Cell nextCell) {
+        boolean winner = attack.attack((Player) cell.getActor(), (Enemy) nextCell.getActor());
+        if (winner) {
+            moveToNext(nextCell);
+        }
+    }
+
+    private void addToItemListAndMove(Cell nextCell) {
+        addToItemList(nextCell);
+        nextCell.setItem(null);
+        moveToNext(nextCell);
+    }
+
+    private void addToFriendAndMove(Cell nextCell) {
+        addToFriendList(nextCell);
+        moveToNext(nextCell);
     }
 
     private boolean checkForDragon(Cell nextCell) {
@@ -122,8 +130,8 @@ public class Player extends Actor implements AffectedByNight {
     private boolean checkForPussInBoots(Cell nextCell) {
         return nextCell.getActor() instanceof PussInBoots;
     }
-  
-   private boolean checkForFiona(Cell nextCell) {
+
+    private boolean checkForFiona(Cell nextCell) {
         return nextCell.getActor() instanceof Fiona;
     }
 
@@ -146,10 +154,6 @@ public class Player extends Actor implements AffectedByNight {
 
     private boolean checkEnemy(Cell nextCell) {
         return nextCell.getActor() instanceof Enemy;
-    }
-
-    private void lavaHurts(Cell nextCell) {
-
     }
 
     private boolean checkIfFriend(Cell nextCell) {
