@@ -18,10 +18,10 @@ public class Fiona extends Friend implements AffectedByNight {
 
     @Override
     public void behaviourAtNight(DayPeriod dayPeriod) {
-        if (dayPeriod.equals(DayPeriod.NIGHT)) {
+        if (dayPeriod.equals(DayPeriod.NIGHT) && cell.getActor() != null && cell.getActor().getTileName().equals("fiona")) {
             cell.setActor(null);
         }
-        else {
+        if (dayPeriod.equals(DayPeriod.DAY)) {
             cell.setActor(this);
         }
     }

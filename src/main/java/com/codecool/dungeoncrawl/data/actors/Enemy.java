@@ -31,7 +31,7 @@ public class Enemy extends Actor{
 
     }
 
-    private boolean checkPlayer(Cell nextCell) {
+    protected boolean checkPlayer(Cell nextCell) {
         return nextCell.getActor() instanceof Player;
     }
 }
