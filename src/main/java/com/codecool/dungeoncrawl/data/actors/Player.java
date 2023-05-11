@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.Item;
+import com.codecool.dungeoncrawl.data.actors.friend.Donkey;
 import com.codecool.dungeoncrawl.data.actors.friend.Dragon;
 import com.codecool.dungeoncrawl.data.actors.friend.Fiona;
 import com.codecool.dungeoncrawl.data.actors.friend.PussInBoots;
@@ -70,14 +71,7 @@ public class Player extends Actor implements AffectedByNight {
     public void move(int dx, int dy) {
         System.out.println(friendList);
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (checkForDragon(nextCell)) {
-            if (checkForDonkey()) {
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
-                addToFriendList(nextCell);
-            }
-        } else if (checkForLava(nextCell)) {
+        if (checkForLava(nextCell)) {
             cell.getActor().setHealth(cell.getActor().getHealth() - 3);
         }
         if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell)) {
@@ -93,25 +87,13 @@ public class Player extends Actor implements AffectedByNight {
                     cell = nextCell;
                 }
             } else if (checkIfFriend(nextCell)) {
-                if (checkForDonkey()) {
-                   if (checkForPussInBoots(nextCell)) {
+                if (checkIfDonkeyIsFriend()) {
+                   if (checkForPussInBoots(nextCell) || checkForDragon(nextCell) || checkForFiona(nextCell)) {
                         addToFriendList(nextCell);
-                        cell.setActor(null);
-                        nextCell.setActor(this);
-                        cell = nextCell;
                       }
-                    if (checkForDragon(nextCell)) {
-                       addToFriendList(nextCell);
-                        cell.setActor(null);
-                        nextCell.setActor(this);
-                        cell = nextCell;
-                    }
-                  if (checkForFiona(nextCell)) {
-                       addToFriendList(nextCell);
-                        cell.setActor(null);
-                        nextCell.setActor(this);
-                        cell = nextCell;
-                    }
+                }
+                else if(checkForDonkey(nextCell)) {
+                    addToFriendList(nextCell);
                 }
             } else if (checkIfItem(nextCell)) {
                 addToItemList(nextCell);
@@ -135,13 +117,12 @@ public class Player extends Actor implements AffectedByNight {
         return nextCell.getActor() instanceof Fiona;
     }
 
-    private boolean checkForDonkey() {
+    private boolean checkIfDonkeyIsFriend() {
         return friendList.contains("donkey");
     }
 
-    public void addToFriends(Friend friend) {
-        friendList.add(friend.getTileName());
-        currentHP = currentHP + 5;
+    private boolean checkForDonkey(Cell nextCell) {
+        return nextCell.getActor() instanceof Donkey;
     }
 
     public List<String> getFriendList() {
@@ -174,9 +155,12 @@ public class Player extends Actor implements AffectedByNight {
 
 
     private void addToFriendList(Cell nextCell) {
-        Player player = (Player) cell.getActor();
         Friend friend = (Friend) nextCell.getActor();
-        player.addToFriends(friend);
+        friendList.add(friend.getTileName());
+        currentHP = currentHP + 5;
+        cell.setActor(null);
+        nextCell.setActor(this);
+        cell = nextCell;
     }
 
     private void addToItemList(Cell nextCell) {
