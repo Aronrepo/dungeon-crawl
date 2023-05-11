@@ -54,10 +54,6 @@ public class Player extends Actor implements AffectedByNight {
         } else {
             currentAD = power * 10;
         }
-
-        if (itemList.contains("sword")) {
-            currentAD += 2;
-        }
     }
 
     private int powerDuringDay() {
