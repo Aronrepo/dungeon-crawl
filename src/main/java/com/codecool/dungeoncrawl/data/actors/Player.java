@@ -3,12 +3,13 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.Item;
+import com.codecool.dungeoncrawl.data.actors.friend.Dragon;
 import com.codecool.dungeoncrawl.logic.Attack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends Actor implements AffectedByNight{
+public class Player extends Actor implements AffectedByNight {
 
     private static int PLAYER_STARTER_HEALTH = 10;
     private static final int PLAYER_STARTER_POWER = 2;
@@ -37,11 +38,10 @@ public class Player extends Actor implements AffectedByNight{
         int power = powerDuringDay();
         if (dayPeriod.equals(DayPeriod.DAY)) {
             currentAD = power;
-        }
-        else {
+        } else {
             currentAD = power * 10;
         }
-        if (itemList.contains("sword")){
+        if (itemList.contains("sword")) {
             currentAD += 2;
         }
     }
@@ -51,11 +51,19 @@ public class Player extends Actor implements AffectedByNight{
     }
 
     public void move(int dx, int dy) {
-            Cell nextCell = cell.getNeighbor(dx, dy);
-        if(checkForLava(nextCell)){
-          cell.getActor().setHealth(cell.getActor().getHealth() -3);
+        System.out.println(friendList);
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        if (checkForDragon(nextCell)) {
+            if (checkForDonkey()) {
+                cell.setActor(null);
+                nextCell.setActor(this);
+                cell = nextCell;
+                addToFriendList(nextCell);
+            }
+        } else if (checkForLava(nextCell)) {
+            cell.getActor().setHealth(cell.getActor().getHealth() - 3);
         }
-        if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell)) {
+        if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell) && !checkForDragon(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -67,7 +75,7 @@ public class Player extends Actor implements AffectedByNight{
                     nextCell.setActor(this);
                     cell = nextCell;
                 }
-            } else if (checkIfFriend(nextCell)) {
+            } else if (checkIfFriend(nextCell) && !checkForDragon(nextCell)) {
                 addToFriendList(nextCell);
                 cell.setActor(null);
                 nextCell.setActor(this);
@@ -80,17 +88,25 @@ public class Player extends Actor implements AffectedByNight{
                 cell = nextCell;
             }
         }
-
     }
 
-    public void addToFriends(Friend friend){
+    private boolean checkForDragon(Cell nextCell) {
+        return nextCell.getActor() instanceof Dragon;
+    }
+
+    private boolean checkForDonkey() {
+        return friendList.contains("donkey");
+    }
+
+    public void addToFriends(Friend friend) {
         friendList.add(friend.getTileName());
     }
-    public List<String> getFriendList(){
+
+    public List<String> getFriendList() {
         return friendList;
     }
 
-    public List<String> getItemList(){
+    public List<String> getItemList() {
         return itemList;
     }
 
@@ -98,19 +114,24 @@ public class Player extends Actor implements AffectedByNight{
         return nextCell.getActor() instanceof Enemy;
     }
 
-    private void lavaHurts(Cell nextCell){
+    private void lavaHurts(Cell nextCell) {
 
     }
-    private boolean checkIfFriend(Cell nextCell) { return nextCell.getActor() instanceof Friend;}
 
-    private boolean checkIfItem(Cell nextCell) { return nextCell.getItem() instanceof Item;}
+    private boolean checkIfFriend(Cell nextCell) {
+        return nextCell.getActor() instanceof Friend;
+    }
+
+    private boolean checkIfItem(Cell nextCell) {
+        return nextCell.getItem() instanceof Item;
+    }
 
     public void addToItems(Item item) {
         itemList.add(item.getTileName());
     }
 
 
-    private void addToFriendList(Cell nextCell){
+    private void addToFriendList(Cell nextCell) {
         Player player = (Player) cell.getActor();
         Friend friend = (Friend) nextCell.getActor();
         player.addToFriends(friend);

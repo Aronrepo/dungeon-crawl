@@ -3,10 +3,12 @@ package com.codecool.dungeoncrawl.data.items;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.Item;
+import com.codecool.dungeoncrawl.data.actors.Player;
 
 public class Fire extends Item {
     protected Cell cell;
     private static int turn = 0;
+    private int hurtPlayer = 3;
 
     private Cell dragon;
     public Fire(Cell cell) {
@@ -25,6 +27,9 @@ public class Fire extends Item {
             cell.setType(CellType.GROUND);
             cell = dragon;
             turn = 0;
+        }
+        if(cell.getActor() instanceof Player){
+            cell.getActor().setHealth(((Player) cell.getActor()).getHealth() - hurtPlayer);
         }
         turn += 1;
     }
