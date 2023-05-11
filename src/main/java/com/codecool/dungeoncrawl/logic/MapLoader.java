@@ -92,6 +92,9 @@ public class MapLoader {
                             cell.setType(CellType.GROUND);
                            new Fire(cell);
                             break;
+                        case 'i' :
+                            cell.setType(CellType.GRAVE);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
