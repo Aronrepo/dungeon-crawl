@@ -7,6 +7,7 @@ import com.codecool.dungeoncrawl.data.actors.friend.Donkey;
 import com.codecool.dungeoncrawl.data.actors.friend.Dragon;
 import com.codecool.dungeoncrawl.data.actors.friend.Fiona;
 import com.codecool.dungeoncrawl.data.actors.friend.PussInBoots;
+import com.codecool.dungeoncrawl.data.items.Sword;
 import com.codecool.dungeoncrawl.logic.Attack;
 
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class Player extends Actor implements AffectedByNight {
                 else if(checkForDonkey(nextCell)) {
                     addToFriendAndMove(nextCell);
                 }
-            } else if (checkIfItem(nextCell)) {
+            } else if (checkIfSword(nextCell)) {
                 addToItemListAndMove(nextCell);
             }
         }
@@ -155,6 +156,10 @@ public class Player extends Actor implements AffectedByNight {
 
     private boolean checkIfItem(Cell nextCell) {
         return nextCell.getItem() instanceof Item;
+    }
+
+    private boolean checkIfSword(Cell nextCell) {
+        return nextCell.getItem() instanceof Sword;
     }
 
     public void addToItems(Item item) {

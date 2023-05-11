@@ -6,12 +6,18 @@ import com.codecool.dungeoncrawl.data.Item;
 
 public class Sword extends Item {
 
+    private final int swordPower = 3;
+
 
     protected Cell cell;
 
     public Sword(Cell cell){
         this.cell = cell;
         this.cell.setItem(this);
+    }
+
+    public int getSwordPower() {
+        return swordPower;
     }
 
     @Override
