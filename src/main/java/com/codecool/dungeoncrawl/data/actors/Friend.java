@@ -15,6 +15,7 @@ public class Friend extends Actor{
     public String getTileName() {
         return null;
     }
+
     public String getActorType(){
         return "friend";
     }

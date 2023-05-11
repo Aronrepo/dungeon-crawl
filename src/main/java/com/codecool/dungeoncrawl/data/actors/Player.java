@@ -79,10 +79,19 @@ public class Player extends Actor implements AffectedByNight{
                     cell = nextCell;
                 }
             } else if (checkIfFriend(nextCell)) {
-                addToFriendList(nextCell);
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
+                if (nextCell.getActor().getTileName().equals("pussInBoots")) {
+                    if (getFriendList().contains("donkey")) {
+                        addToFriendList(nextCell);
+                        cell.setActor(null);
+                        nextCell.setActor(this);
+                        cell = nextCell;
+                    }
+                } else {
+                    addToFriendList(nextCell);
+                    cell.setActor(null);
+                    nextCell.setActor(this);
+                    cell = nextCell;
+                }
             } else if (checkIfItem(nextCell)) {
                 addToItemList(nextCell);
                 nextCell.setItem(null);
