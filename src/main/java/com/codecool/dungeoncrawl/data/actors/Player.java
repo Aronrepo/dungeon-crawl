@@ -68,16 +68,8 @@ public class Player extends Actor implements AffectedByNight {
     }
 
     public void move(int dx, int dy) {
-        System.out.println(friendList);
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (checkForDragon(nextCell)) {
-            if (checkForDonkey()) {
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
-                addToFriendList(nextCell);
-            }
-        } else if (checkForLava(nextCell)) {
+        if (checkForLava(nextCell)) {
             cell.getActor().setHealth(cell.getActor().getHealth() - 3);
         }
         if (checkForWall(nextCell) && checkIfIsEmpty(nextCell) && !checkIfItem(nextCell)) {
