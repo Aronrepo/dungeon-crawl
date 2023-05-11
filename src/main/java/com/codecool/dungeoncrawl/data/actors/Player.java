@@ -29,6 +29,16 @@ public class Player extends Actor implements AffectedByNight{
     }
 
     @Override
+    public int getHealth() {
+        return currentHP;
+    }
+
+    @Override
+    public void setHealth(int changeHealth) {
+        currentHP = changeHealth;
+    }
+
+    @Override
     public int getPower() {
         return currentAD;
     }
@@ -86,6 +96,7 @@ public class Player extends Actor implements AffectedByNight{
 
     public void addToFriends(Friend friend){
         friendList.add(friend.getTileName());
+        currentHP = currentHP + 5;
     }
     public List<String> getFriendList(){
         return friendList;
