@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.data.actors.enemy;
 
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.actors.Enemy;
 import com.codecool.dungeoncrawl.data.actors.Player;
 
@@ -16,7 +17,6 @@ public class Skeleton extends Enemy {
 
     public Skeleton(Cell cell) {
         super(cell, SKELETON_HEALTH, SKELETON_POWER);
-
     }
 
     @Override
@@ -27,6 +27,7 @@ public class Skeleton extends Enemy {
 
     public void move() {
         if (this.getHealth() <= 0) {
+            cell.setType(CellType.GRAVE);
             if (cell.getActor() instanceof Skeleton) {
                 cell.setActor(null);
             }
