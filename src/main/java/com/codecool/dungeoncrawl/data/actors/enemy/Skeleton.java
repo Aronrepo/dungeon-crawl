@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Skeleton extends Enemy {
 
-    private static final int SKELETON_HEALTH = 1;
+    private static final int SKELETON_HEALTH = 7;
     private static final int SKELETON_POWER = 1;
 
     private int turnNum = 0;
@@ -29,14 +29,18 @@ public class Skeleton extends Enemy {
             cell.setActor(null);
         } else if (turnNum % 2 == 0) {
             Cell rightCell = cell.getNeighbor(1, 0);
-            cell.setActor(null);
-            rightCell.setActor(this);
-            cell = rightCell;
+            if(checkSurroundingCells()){
+                cell.setActor(null);
+                rightCell.setActor(this);
+                cell = rightCell;
+            }
         } else {
             Cell leftCell = cell.getNeighbor(-1, 0);
-            cell.setActor(null);
-            leftCell.setActor(this);
-            cell = leftCell;
+            if(checkSurroundingCells()){
+                cell.setActor(null);
+                leftCell.setActor(this);
+                cell = leftCell;
+            }
 
         }
         turnNum += 1;
