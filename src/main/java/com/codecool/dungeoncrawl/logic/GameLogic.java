@@ -51,6 +51,7 @@ public class GameLogic {
         map.getFiona().behaviourAtNight(cycle.getDayPeriod());
         map.moveSKeletons();
         map.getDragon().shootFire();
+        map.getFarquad().checkIfDead();
 
         if (Integer.parseInt(getPlayerHealth()) <= 0) {
             map = MapLoader.loadLoseMap();
