@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.DayPeriod;
 import com.codecool.dungeoncrawl.data.Item;
+import com.codecool.dungeoncrawl.data.actors.friend.Donkey;
 import com.codecool.dungeoncrawl.data.actors.friend.Dragon;
 import com.codecool.dungeoncrawl.data.actors.friend.Fiona;
 import com.codecool.dungeoncrawl.data.actors.friend.PussInBoots;
@@ -69,6 +70,9 @@ public class Player extends Actor implements AffectedByNight {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
+        if(checkIfDonkex(nextCell)){
+            addToFriendAndMove(nextCell);
+        }
         if (checkForLava(nextCell)) {
             moveToLava();
         }
@@ -97,6 +101,9 @@ public class Player extends Actor implements AffectedByNight {
 
     private void moveToLava() {
         cell.getActor().setHealth(cell.getActor().getHealth() - 3);
+    }
+    private boolean checkIfDonkex(Cell nextCell){
+        return nextCell.getActor() instanceof Donkey;
     }
 
     private void moveToNext(Cell nextCell) {
