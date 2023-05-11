@@ -19,8 +19,4 @@ public class Friend extends Actor{
     public String getActorType(){
         return "friend";
     }
-
-    public void addToFriendList(Player player){
-        player.addToFriends(this);
-    }
 }

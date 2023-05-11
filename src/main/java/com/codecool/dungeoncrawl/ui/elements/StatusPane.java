@@ -24,6 +24,7 @@ public class StatusPane {
     private Label itemInstructions;
     private Label friendInstruction;
     private Label enemyInstruction;
+    private Label intro;
     private Label goal;
     private Label itemText;
     private Label itemList;
@@ -31,11 +32,12 @@ public class StatusPane {
 
     public StatusPane() {
         ui = new GridPane();
-        goal = new Label("-your goal is to get to fiona");
-        enemyInstruction = new Label("-enemies hurts you");
-        friendInstruction = new Label("-friends helps you");
-        itemInstructions = new Label("-items help you kill");
-        outro = new Label("good luck!");
+        intro = new Label("Welcome Shrek!");
+        goal = new Label("- Your goal: rescue Fiona");
+        enemyInstruction = new Label("- Enemies will hurt you");
+        friendInstruction = new Label("- Friends will help you");
+        itemInstructions = new Label("- Items give you power");
+        outro = new Label("Good Luck!");
         dayTextLabel = new Label("Time of Day: ");
         dayValueLabel = new Label();
         healthTextLabel = new Label("Health: ");
@@ -63,11 +65,12 @@ public class StatusPane {
         ui.add(friendList, 1, 3);
         ui.add(itemText, 0, 4);
         ui.add(itemList, 1, 4);
-        ui.add(goal, 0,6);
-        ui.add(enemyInstruction, 0,7);
-        ui.add(friendInstruction, 0,8);
-        ui.add(itemInstructions, 0,9);
-        ui.add(outro, 0,10);
+        ui.add(intro, 0, 6);
+        ui.add(goal, 0,7);
+        ui.add(enemyInstruction, 0,8);
+        ui.add(friendInstruction, 0,9);
+        ui.add(itemInstructions, 0,10);
+        ui.add(outro, 0,11);
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);

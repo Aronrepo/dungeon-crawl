@@ -70,9 +70,6 @@ public class Player extends Actor implements AffectedByNight {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if(checkIfDonkex(nextCell)){
-            addToFriendAndMove(nextCell);
-        }
         if (checkForLava(nextCell)) {
             moveToLava();
         }
@@ -82,16 +79,13 @@ public class Player extends Actor implements AffectedByNight {
             if (checkEnemy(nextCell)) {
                 killingAndWinning(nextCell);
             } else if (checkIfFriend(nextCell)) {
-                if (checkForDonkey()) {
-                    if (checkForPussInBoots(nextCell)) {
+                if (checkIfDonkeyIsFriend()) {
+                   if (checkForPussInBoots(nextCell) || checkForDragon(nextCell) || checkForFiona(nextCell)) {
                         addToFriendAndMove(nextCell);
-                    }
-                    if (checkForDragon(nextCell)) {
-                        addToFriendAndMove(nextCell);
-                    }
-                    if (checkForFiona(nextCell)) {
-                        addToFriendAndMove(nextCell);
-                    }
+                      }
+                }
+                else if(checkForDonkey(nextCell)) {
+                    addToFriendAndMove(nextCell);
                 }
             } else if (checkIfItem(nextCell)) {
                 addToItemListAndMove(nextCell);
@@ -101,9 +95,6 @@ public class Player extends Actor implements AffectedByNight {
 
     private void moveToLava() {
         cell.getActor().setHealth(cell.getActor().getHealth() - 3);
-    }
-    private boolean checkIfDonkex(Cell nextCell){
-        return nextCell.getActor() instanceof Donkey;
     }
 
     private void moveToNext(Cell nextCell) {
@@ -142,13 +133,12 @@ public class Player extends Actor implements AffectedByNight {
         return nextCell.getActor() instanceof Fiona;
     }
 
-    private boolean checkForDonkey() {
+    private boolean checkIfDonkeyIsFriend() {
         return friendList.contains("donkey");
     }
 
-    public void addToFriends(Friend friend) {
-        friendList.add(friend.getTileName());
-        currentHP = currentHP + 5;
+    private boolean checkForDonkey(Cell nextCell) {
+        return nextCell.getActor() instanceof Donkey;
     }
 
     public List<String> getFriendList() {
@@ -177,9 +167,9 @@ public class Player extends Actor implements AffectedByNight {
 
 
     private void addToFriendList(Cell nextCell) {
-        Player player = (Player) cell.getActor();
         Friend friend = (Friend) nextCell.getActor();
-        player.addToFriends(friend);
+        friendList.add(friend.getTileName());
+        currentHP = currentHP + 5;
     }
 
     private void addToItemList(Cell nextCell) {
