@@ -3,6 +3,9 @@ package com.codecool.dungeoncrawl.data.actors.enemy;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.actors.Enemy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Skeleton extends Enemy {
 
     private static final int SKELETON_HEALTH = 1;
@@ -23,15 +26,35 @@ public class Skeleton extends Enemy {
     public void move(){
         if(turnNum % 2 == 0){
             Cell rightCell = cell.getNeighbor(1,0);
-            cell.setActor(null);
-            rightCell.setActor(this);
-            cell = rightCell;
+            if(checkSurroundingCells()){
+                cell.setActor(null);
+                rightCell.setActor(this);
+                cell = rightCell;
+            }
+            //checkPlayer(rightCell);
         } else {
             Cell leftCell = cell.getNeighbor(-1,0);
-            cell.setActor(null);
-            leftCell.setActor(this);
-            cell = leftCell;
+            if(checkSurroundingCells()){
+                cell.setActor(null);
+                leftCell.setActor(this);
+                cell = leftCell;
+            }
         }
         turnNum += 1;
+    }
+
+    private boolean checkSurroundingCells() {
+        List<Cell> surroundingCells = new ArrayList<>();
+        surroundingCells.add(cell.getNeighbor(1, 0));
+        surroundingCells.add(cell.getNeighbor(-1, 0));
+        surroundingCells.add(cell.getNeighbor(0, 1));
+        surroundingCells.add(cell.getNeighbor(0, -1));
+        for (Cell sourroundingCell : surroundingCells) {
+            if (checkPlayer(sourroundingCell)) {
+                return false;
+            }
+
+        }
+        return true;
     }
 }
