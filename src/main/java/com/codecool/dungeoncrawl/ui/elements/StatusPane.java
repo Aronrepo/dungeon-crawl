@@ -21,12 +21,21 @@ public class StatusPane {
     private Label powerValueLabel;
     private Label friendText;
     private Label friendList;
-
+    private Label itemInstructions;
+    private Label friendInstruction;
+    private Label enemyInstruction;
+    private Label goal;
     private Label itemText;
     private Label itemList;
+    private Label outro;
 
     public StatusPane() {
         ui = new GridPane();
+        goal = new Label("-your goal is to get to fiona");
+        enemyInstruction = new Label("-enemies hurts you");
+        friendInstruction = new Label("-friends helps you");
+        itemInstructions = new Label("-items help you kill");
+        outro = new Label("good luck!");
         dayTextLabel = new Label("Time of Day: ");
         dayValueLabel = new Label();
         healthTextLabel = new Label("Health: ");
@@ -54,6 +63,11 @@ public class StatusPane {
         ui.add(friendList, 1, 3);
         ui.add(itemText, 0, 4);
         ui.add(itemList, 1, 4);
+        ui.add(goal, 0,6);
+        ui.add(enemyInstruction, 0,7);
+        ui.add(friendInstruction, 0,8);
+        ui.add(itemInstructions, 0,9);
+        ui.add(outro, 0,10);
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);
